@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
     
 <%@ page import="java.util.ArrayList" %>      
 <%@ page import="data.Question" %>    
@@ -16,18 +16,23 @@
 <body>
 <h2>Vaalikone</h2>
 
-	<ol>
+<ol>
 		<c:forEach var="kysymys" items="${requestScope.questionlist}" >			
-			<li>${kysymykset.id}: ${kysymykset.kysymys} 
+			<li>${question.kysymys_id}: ${question.kysymys} <a href='/delete?id=${fish.id}'>delete</a> <a href='/readtoupdate?id=${fish.id}'>update</a>
+			<input type="radio" name="1">1 
+			<input type="radio" name="2">2 
+			<input type="radio" name="3">3 
+			<input type="radio" name="4">4 
+			<input type="radio" name="5">5 	
 		</c:forEach>
 	</ol>
 	
 <%
-ArrayList<Question> questionList=(ArrayList<Question>)request.getAttribute("questionlist");			//jsp voi sis√§lt√§√§ java-koodia
+ArrayList<Question> questionList=(ArrayList<Question>)request.getAttribute("questionlist");			//jsp voi sis‰lt‰‰ java-koodia
 
 for (int i=0;questionList!=null && i<questionList.size();i++){
 	Question q=questionList.get(i);
-	out.println(q.getId()+": "+q.getKysymys()+"<a href='/delete?id="+q.getId()+"'>delete</a> <a href='/readtoupdate?id="+q.getId()+"'>update</a>");
+	out.println(q.getId()+". "+q.getKysymys() + "<br>");
 }
 %>
 		

@@ -62,7 +62,7 @@ public class Dao {
 		}
 		}
 	
-	public Question readQuestion(String kysymys_id) {							//luetaan tietty kala
+	public Question readQuestion(String kysymys_id) {							//luetaan tietty kysymys
 		Question q=null;
 		try {
 			String sql="select * from kysymys where id=?";
