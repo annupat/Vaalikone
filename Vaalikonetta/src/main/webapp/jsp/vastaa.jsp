@@ -16,9 +16,10 @@
 <body>
 <h2>Vaalikone</h2>
 
+<!-- EI TOIMI!-->
 <ol>
 		<c:forEach var="kysymys" items="${requestScope.questionlist}" >			
-			<li>${question.kysymys_id}: ${question.kysymys} <a href='/delete?id=${fish.id}'>delete</a> <a href='/readtoupdate?id=${fish.id}'>update</a>
+			<li>${question.kysymys_id}: ${question.kysymys} 
 			<input type="radio" name="1">1 
 			<input type="radio" name="2">2 
 			<input type="radio" name="3">3 
@@ -32,7 +33,9 @@ ArrayList<Question> questionList=(ArrayList<Question>)request.getAttribute("ques
 
 for (int i=0;questionList!=null && i<questionList.size();i++){
 	Question q=questionList.get(i);
-	out.println(q.getId()+". "+q.getKysymys() + "<br>");
+	out.println(q.getId()+". "+q.getKysymys() + "<br>" + "<button type=radio name=1>täysin eri mieltä </button>" + "   " +
+			"<button type=radio name=1>täysin samaa mieltä </button>" + "<br>"		
+			);
 }
 %>
 		
