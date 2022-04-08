@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import data.Question;
+import data.Answer;
 
 import java.sql.Connection;
 
@@ -62,6 +63,8 @@ public class Dao {
 		}
 		}
 	
+
+	
 	public Question readQuestion(String kysymys_id) {							//luetaan tietty kysymys
 		Question q=null;
 		try {
@@ -80,5 +83,22 @@ public class Dao {
 			return null;
 		}
 	}
-	}
+	
 
+	public ArrayList<Answer> saveAnswer(Answer a) {
+		 ArrayList<Answer> list = new ArrayList<>();
+		try {
+			String sql = "Insert into table vastaukset(ehdokas_id, kysymys_id, vastaus, kommentti) values ("+ a.getEhdokasId() + "," + a.getKysymysId() + "," + a.getVastaus() + "," + a.getKommentti() + ")";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, a.getEhdokasId());
+			pstmt.setString(2, a.getKysymysId());
+			pstmt.setString(3, a.getVastaus());
+			pstmt.setString(4, a.getKommentti());
+			pstmt.executeUpdate();
+			return list;
+		}
+		catch(SQLException e) {
+			return null;
+	}
+	}
+}
