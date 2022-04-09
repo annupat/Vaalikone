@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.nio.charset.StandardCharsets;
 
 import dao.Dao;
 import data.Question;
@@ -23,7 +24,7 @@ public class ReadQuestions extends HttpServlet {
 	
 	@Override
 	public void init() {
-		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "annukka2", "heihei");
+		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "timojaakko", "T1mo67");
 	}   
 	
     /**
