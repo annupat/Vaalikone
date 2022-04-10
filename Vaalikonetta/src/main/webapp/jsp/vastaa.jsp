@@ -33,13 +33,30 @@
   				"<div><input type='radio' name='vastaus_"+i + "'"+" value='3' id=3 >en osaa sanoa" + "</div>"+ "   " + 
   			"<div><input type='radio' name='vastaus_" +i +"'"+" value='4' id=4 >jokseenkin samaa mieltä" + "</div>"+ "   " + 
   				"<div><input type='radio' name='vastaus_"+i +"'"+" value='5' id=5 >täysin samaa mieltä" + "</div>");
-  } 	
+  	} 	
 
+  		
  %> 
  
   <input type='submit' name='ok' value='Tallenna vastaukset'>
  </form> 
  
+ 
+<%--  <%  --%>
+<!-- //   		ArrayList<Question> questionList = (ArrayList<Question>) request.getAttribute("questionlist"); //jsp voi sisältää java-koodia  -->
+
+<!-- //   	for (int i = 0; questionList != null && i < questionList.size(); i++) {   -->
+<!-- //   		Question q = questionList.get(i);  -->
+<!-- //   		out.println(q.getId() + ". " + q.getKysymys() +   -->
+<!-- //   				"<div>" + "<input type='radio' name='vastaus_"+i +"'"+" value='1' id=1 >täysin eri mieltä</div>" -->
+<!-- //   		+ "   " + "<div><input type='radio' name='vastaus_"+i +"'"+" value='2' id=2 >jokseenkin eri mieltä" + "</div>"+ "   " +  -->
+<!-- //   				"<div><input type='radio' name='vastaus_"+i + "'"+" value='3' id=3 >en osaa sanoa" + "</div>"+ "   " +  -->
+<!-- //   			"<div><input type='radio' name='vastaus_" +i +"'"+" value='4' id=4 >jokseenkin samaa mieltä" + "</div>"+ "   " +  -->
+<!-- //   				"<div><input type='radio' name='vastaus_"+i +"'"+" value='5' id=5 >täysin samaa mieltä" + "</div>"); -->
+<!-- //   	} 	 -->
+
+  		
+<%--  %>  --%>
  
  
 

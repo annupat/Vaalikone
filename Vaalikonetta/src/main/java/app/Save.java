@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
 import data.Answer;
+import data.Question;
 
 /**
  * Servlet implementation class Save
@@ -51,26 +52,28 @@ public class Save extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		
+		for ( int i = 0; i < 19; i++); {
 			String ehdokas_id = request.getParameter("ehdokas_id");
-			String kysymys_id = request.getParameter("kysymys_id");
+			String kysymys_id = request.getParameter("kysymys_id");	
 			String vastaus = request.getParameter("vastaus_0");
-			String kommentti = request.getParameter("Ehdokkaan " + ehdokas_id + "vastaus kysymykseen " + kysymys_id);
+			String kommentti = request.getParameter("kommentti");
 			
-			System.out.println("Vastaus:"+vastaus);
+			System.out.println("vastaus: "+ vastaus);
 			System.out.println("ehdokas:"+ehdokas_id);
 			System.out.println("kysymys:"+kysymys_id);
 			System.out.println("kommentti:"+kommentti);
-			
+																	
 			Answer a = new Answer(ehdokas_id, kysymys_id, vastaus, kommentti);
 			
 			ArrayList<Answer> list = null;
 			if (dao.getConnection()) {
-				list = dao.saveAnswer(a);
+				list=dao.saveAnswer(a);
 			}
-			
-			request.setAttribute("questionlist", list);
+		
+			request.setAttribute("answerlist", list);
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/tallennettu.jsp");
 			rd.forward(request, response);
-	}
+	}	}
 
 }

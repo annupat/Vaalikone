@@ -88,17 +88,22 @@ public class Dao {
 	public ArrayList<Answer> saveAnswer(Answer a) {
 		 ArrayList<Answer> list = new ArrayList<>();
 		try {
-			String sql = "Insert into table vastaukset(ehdokas_id, kysymys_id, vastaus, kommentti) values ("+ a.getEhdokasId() + "," + a.getKysymysId() + "," + a.getVastaus() + "," + a.getKommentti() + ")";
+			String sql = "Insert into vastaukset (ehdokas_id, kysymys_id, vastaus, kommentti) values (?,?,?,?);";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, a.getEhdokasId());
 			pstmt.setString(2, a.getKysymysId());
 			pstmt.setString(3, a.getVastaus());
 			pstmt.setString(4, a.getKommentti());
 			pstmt.executeUpdate();
+			System.out.println("Tiedot lähetetty tietokantaan");
+			
 			return list;
+			
 		}
 		catch(SQLException e) {
+			System.out.println("Tiedot ei lähetetty tietokantaan" +e);
 			return null;
 	}
 	}
+
 }
