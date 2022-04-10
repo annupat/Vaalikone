@@ -46,17 +46,12 @@ ArrayList<Question> questionList = (ArrayList<Question>) request.getAttribute("q
 <style>
 .btn .button {
 position: relative;
-top: 70%;
 }
 h2 {
 font-family: Helvetica;
 }
 body {
 text-align: center;
-row-gap: 1ch;
-}
-.questions {
-row-gap: 1ch;
 }
 
 </style>
