@@ -15,7 +15,7 @@ import data.Answer;
 
 @WebServlet(
     name = "DeleteAnswer",
-    urlPatterns = {"/deleteanswer"}
+    urlPatterns = {"/delete"}
 )
 public class DeleteAnswer extends HttpServlet {
 	private Dao dao;
@@ -25,11 +25,11 @@ public class DeleteAnswer extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 	     throws IOException, ServletException {
-//		String ehdokas_id=request.getParameter("ehdokas_id");
 		String kysymys_id=request.getParameter("kysymys_id");
 		ArrayList<Answer> list=null;
 		if (dao.getConnection()) {
 			list=dao.deleteAnswer(kysymys_id);
+			System.out.println("Kysymys_id: " + kysymys_id);
 		}	
 		request.setAttribute("answerlist", list);	
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/deleteanswer.jsp");  

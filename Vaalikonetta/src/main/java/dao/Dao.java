@@ -10,8 +10,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 
+
 import data.Question;
 import data.Answer;
+
 
 import java.sql.Connection;
 
@@ -90,14 +92,16 @@ public class Dao {
 	public Answer readAnswer(String ehdokas_id) {							
 		Answer a=null;
 		try {
-			String sql="select * from vastaukset where ehdokas_id=?";
+			String sql="select * from vastaukset where id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, ehdokas_id);
 			ResultSet RS=pstmt.executeQuery();
 			while (RS.next()){
 				a=new Answer();
+				a.setEhdokas_id(RS.getInt("ehdokas_id"));
 				a.setKysymys_id(RS.getInt("kysymys_id"));
-				a.setVastaus(RS.getString("vastaus"));
+				a.setVastaus(RS.getInt("vastaus"));
+				a.setKommentti(RS.getString("kommentti"));
 			}
 			return a;
 		}
@@ -105,21 +109,22 @@ public class Dao {
 			return null;
 		}
 	}
+
 	
-	public ArrayList<Answer> deleteAnswer(String kysymys_id) {
+	public ArrayList<Answer> deleteAnswer(String kysymys_id) {				
 		try {
-			String sql="delete from vastaukset where kysymys_id=?";
+			String sql="delete from vastaukset where ehdokas_id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
-	//		pstmt.setString(1,ehdokas_id);
-			pstmt.setString(1,kysymys_id);
+			pstmt.setString(1, kysymys_id);
 			pstmt.executeUpdate();
+			System.out.println("Vastaus kysymykseen nro " + kysymys_id + " poistettu");
 			return readAllAnswer();
 		}
 		catch(SQLException e) {
+			System.out.println(e);
 			return null;
 		}
 	}
-	
 	
 	}
 

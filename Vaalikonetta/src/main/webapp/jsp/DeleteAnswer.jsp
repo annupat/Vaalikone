@@ -20,7 +20,7 @@
 <!-- 	<p> -->
 <!-- 		Ehdokasnumerosi: <input type='text' name='ehdokas_id'> <br>  -->
 <!-- 		Vastaus: <input type='text' name='vastaus' ><br> -->
-<!-- 		<input type='submit' value='Poista'>  -->
+<!-- 		<input type='submit' value='Poista'> -->
 <!-- </form> -->
 
 
@@ -31,8 +31,9 @@ ArrayList<Answer> answerList=(ArrayList<Answer>)request.getAttribute("answerlist
 for (int i=0;answerList!=null && i<answerList.size();i++){
 	Answer a=answerList.get(i);
  	out.println("Vastaus kysymykseen " + a.getKysymys_id()+": "+a.getVastaus()+ "    " +
-	"<a href='/deleteanswer?id="+a.getKysymys_id()+"'</a>" + 
- 	"<button type='button'>Poista vastaus</button></a>" + "<br>");
+	"<a href='/delete?kysymys_id="+a.getKysymys_id() + 
+ 	"'<button type='button'>Poista vastaus</button></a>" + 
+	"<br>");
 }
 
 

@@ -38,12 +38,15 @@ public class ReadAnswer extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String ehdokas_id=request.getParameter("ehdokas_id");
 		ArrayList<Answer> list=null;										
 		if (dao.getConnection()) {		
-			list=dao.readAllAnswer();	
+			list=dao.readAllAnswer();
+			System.out.println("Kysymykset luettu");
 		}
 		else {
 			System.out.println("No connection to database");
@@ -55,26 +58,5 @@ public class ReadAnswer extends HttpServlet {
 		
 	}
 
-//public void doGet(HttpServletRequest request, HttpServletResponse response) 
-//	     throws IOException {
-//		response.sendRedirect("index.html");
-//	}
-//	public void doPost(HttpServletRequest request, HttpServletResponse response) 
-//	     throws IOException, ServletException {
-//		String ehdokas_id=request.getParameter("ehdokas_id");
-//		String kysymys_id=request.getParameter("kysymys_id");
-//		String vastaus=request.getParameter("vastaus");
-//		
-//		Answer a=new Answer(ehdokas_id, kysymys_id, vastaus);
-//		
-//		ArrayList<Answer> list=null;
-//		if (dao.getConnection()) {
-//			list=dao.deleteAnswer(ehdokas_id,kysymys_id);
-//		}
-//		
-//		request.setAttribute("answerlist", list);
-//		RequestDispatcher rd=request.getRequestDispatcher("/jsp/deleteanswer.jsp");
-//		rd.forward(request, response);
-//	}
 
 }
