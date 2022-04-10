@@ -80,5 +80,18 @@ public class Dao {
 			return null;
 		}
 	}
+	public ArrayList<Question> updateQuestions(Question f) {
+		try {
+			String sql="update given answer=? where id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, f.getKysymys());
+			pstmt.setInt(2, f.getId());
+			pstmt.executeUpdate();
+			return readAllQuestion();
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
 	}
 

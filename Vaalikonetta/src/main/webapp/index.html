@@ -13,14 +13,37 @@
 		Painamalla alla olevaa nappia, pääset vastaamaan kysymyksiin. </p>
 		
 
+	</div>
 
+	<div class="btn-group">
         <a href='/readquestions'>
       
 
-      <button type=button style="margin-left:46%"> Vastaa kysymyksiin</button></a>
-     </div>
+      <button class="button" type=button> Vastaa kysymyksiin</button></a>
+      
+      <a href='/readtoupdate'>
+      
+      <button class="button" type=button> Muokkaa vastauksia</button></a>
+      
+  	</div>
   </body>
    <style>
+   
+  .container{
+  position: absolute;
+	left: 50%;
+	top: 30%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+  }
+  .btn-group .button{
+  position: relative;
+  text-align: center;
+  left: 39%;
+  top: 50%;
+  
+  }
+  
   body {
   background-image: url('parlamenttiTalo.jpg');
   background-repeat: no-repeat;
