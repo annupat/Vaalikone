@@ -3,12 +3,15 @@ package data;
 
 public class Answer {
 	private String vastaus = "";
-	private String kysymys_id;
+	private int kysymys_id;
 	private String ehdokas_id;
-	private String kommentti = "ehdokkaan " + ehdokas_id + " vastaus kysymykseen " + kysymys_id;
+	private String kommentti;
 	
-	public Answer(String ehdokas_id, String kysymys_id, String vastaus, String kommentti) {
+	public Answer(String ehdokas_id, int kysymys_id, String vastaus) {
+		this.kommentti = "ehdokkaan " + ehdokas_id + " vastaus kysymykseen " + kysymys_id;
 		this.vastaus = vastaus;
+		this.ehdokas_id = ehdokas_id;
+		this.kysymys_id = kysymys_id;
 	}
 	
 	public Answer() {
@@ -23,12 +26,12 @@ public class Answer {
 		this.ehdokas_id = ehdokas_id;
 	}
 	
-	public String getKysymysId() {
+	public int getKysymysId() {
 		
 		return kysymys_id;
 	}
 	
-	public void setKysymysId(String kysymys_id) {
+	public void setKysymysId(int kysymys_id) {
 		this.kysymys_id = kysymys_id;
 	}
 	

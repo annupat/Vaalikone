@@ -90,8 +90,11 @@ public class Dao {
 		try {
 			String sql = "Insert into vastaukset (ehdokas_id, kysymys_id, vastaus, kommentti) values (?,?,?,?);";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			System.out.println("ehdokas_id" + a.getEhdokasId());
+			System.out.println("kysymys_id" + a.getKysymysId());
 			pstmt.setString(1, a.getEhdokasId());
-			pstmt.setString(2, a.getKysymysId());
+			pstmt.setInt(2, a.getKysymysId());
 			pstmt.setString(3, a.getVastaus());
 			pstmt.setString(4, a.getKommentti());
 			pstmt.executeUpdate();

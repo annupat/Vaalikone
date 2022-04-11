@@ -53,18 +53,19 @@ public class Save extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		for ( int i = 0; i < 19; i++); {
+		for ( int i = 0; i < 19; i++) {
 			String ehdokas_id = request.getParameter("ehdokas_id");
-			String kysymys_id = request.getParameter("kysymys_id");	
-			String vastaus = request.getParameter("vastaus_0");
+			String tmp = "vastaus_" + i;
+			String vastaus = request.getParameter(tmp);
+			int kysymys_id = i+1;
 			String kommentti = request.getParameter("kommentti");
 			
 			System.out.println("vastaus: "+ vastaus);
-			System.out.println("ehdokas:"+ehdokas_id);
-			System.out.println("kysymys:"+kysymys_id);
+			System.out.println("ehdokas id:"+ehdokas_id);
+			System.out.println("kysymys id:"+kysymys_id);
 			System.out.println("kommentti:"+kommentti);
 																	
-			Answer a = new Answer(ehdokas_id, kysymys_id, vastaus, kommentti);
+			Answer a = new Answer(ehdokas_id, kysymys_id, vastaus);
 			
 			ArrayList<Answer> list = null;
 			if (dao.getConnection()) {
