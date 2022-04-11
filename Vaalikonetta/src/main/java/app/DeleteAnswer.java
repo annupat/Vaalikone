@@ -26,10 +26,12 @@ public class DeleteAnswer extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 	     throws IOException, ServletException {
 		String kysymys_id=request.getParameter("kysymys_id");
+		String ehdokas_id=request.getParameter("ehdokas_id");
 		ArrayList<Answer> list=null;
 		if (dao.getConnection()) {
-			list=dao.deleteAnswer(kysymys_id);
+			list=dao.deleteAnswer(ehdokas_id, kysymys_id);
 			System.out.println("Kysymys_id: " + kysymys_id);
+			System.out.println("Ehdokas_id: " + ehdokas_id);
 		}	
 		request.setAttribute("answerlist", list);	
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/deleteanswer.jsp");  

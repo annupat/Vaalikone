@@ -46,7 +46,7 @@ public class ReadAnswer extends HttpServlet {
 		String ehdokas_id=request.getParameter("ehdokas_id");
 		ArrayList<Answer> list=null;										
 		if (dao.getConnection()) {		
-			list=dao.readAllAnswer();
+			list=dao.readAnswer(ehdokas_id);
 			System.out.println("Kysymykset luettu");
 			System.out.println("Ehdokas_id" + ehdokas_id);
 		}

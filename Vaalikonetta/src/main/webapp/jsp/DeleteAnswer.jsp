@@ -17,24 +17,16 @@
 <h2>Vaalikone</h2>
 
 
-
-<form action='readanswer' method='post'>
-		<p>
-			Ehdokasnumerosi: <input type='text' name='ehdokas_id' value='${requestScope.vastaukset.ehdokas_id}' readonly> <br>
-			<input type='submit' value='Lähetä'>
-	</form>
-
 <%
 ArrayList<Answer> answerList=(ArrayList<Answer>)request.getAttribute("answerlist");			
 
 for (int i=0;answerList!=null && i<answerList.size();i++){
 	Answer a=answerList.get(i);
  	out.println("Vastaus kysymykseen " + a.getKysymys_id()+": "+a.getVastaus()+ "    " +
-	"<a href='/delete?kysymys_id="+a.getKysymys_id() + 
- 	"'<button type='button'>Poista vastaus</button></a>" + 
+	"<a href='/delete?kysymys_id=" + a.getKysymys_id() + 
+ 	"'< button type='button'>Poista vastaus</button></a>" + 
 	"<br>");
 }
-
 
 %>
 
