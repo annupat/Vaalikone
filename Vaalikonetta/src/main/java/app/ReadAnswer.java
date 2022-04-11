@@ -40,13 +40,15 @@ public class ReadAnswer extends HttpServlet {
 	 */
 
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String ehdokas_id=request.getParameter("ehdokas_id");
 		ArrayList<Answer> list=null;										
 		if (dao.getConnection()) {		
 			list=dao.readAllAnswer();
 			System.out.println("Kysymykset luettu");
+			System.out.println("Ehdokas_id" + ehdokas_id);
 		}
 		else {
 			System.out.println("No connection to database");

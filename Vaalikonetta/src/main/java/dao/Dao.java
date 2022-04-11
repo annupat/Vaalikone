@@ -89,10 +89,10 @@ public class Dao {
 		}
 	
 
-	public Answer readAnswer(String ehdokas_id) {							
+	public ArrayList<Answer> readAnswer(String ehdokas_id) {							
 		Answer a=null;
 		try {
-			String sql="select * from vastaukset where id=?";
+			String sql="select * from vastaukset where ehdokas_id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, ehdokas_id);
 			ResultSet RS=pstmt.executeQuery();
@@ -103,9 +103,10 @@ public class Dao {
 				a.setVastaus(RS.getInt("vastaus"));
 				a.setKommentti(RS.getString("kommentti"));
 			}
-			return a;
+			return readAnswer(ehdokas_id);
 		}
 		catch(SQLException e) {
+			System.out.println(e);
 			return null;
 		}
 	}
@@ -113,7 +114,7 @@ public class Dao {
 	
 	public ArrayList<Answer> deleteAnswer(String kysymys_id) {				
 		try {
-			String sql="delete from vastaukset where ehdokas_id=?";
+			String sql="delete from vastaukset where kysymys_id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, kysymys_id);
 			pstmt.executeUpdate();

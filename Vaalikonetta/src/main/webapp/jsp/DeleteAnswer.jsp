@@ -16,14 +16,13 @@
 <body>
 <h2>Vaalikone</h2>
 
-<!-- <form action="/readanswer" method="post"> -->
-<!-- 	<p> -->
-<!-- 		Ehdokasnumerosi: <input type='text' name='ehdokas_id'> <br>  -->
-<!-- 		Vastaus: <input type='text' name='vastaus' ><br> -->
-<!-- 		<input type='submit' value='Poista'> -->
-<!-- </form> -->
 
 
+<form action='readanswer' method='post'>
+		<p>
+			Ehdokasnumerosi: <input type='text' name='ehdokas_id' value='${requestScope.vastaukset.ehdokas_id}' readonly> <br>
+			<input type='submit' value='Lähetä'>
+	</form>
 
 <%
 ArrayList<Answer> answerList=(ArrayList<Answer>)request.getAttribute("answerlist");			
