@@ -1,20 +1,53 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fi">
   <head>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
     <title>Vaalikone</title>
   </head>
-
+ 
+  
   <body>
-    <h1>Tervetuloa vaalikoneeseen!</h1>
-	<p> Hienoa, että olet päättänyt asettautua ehdolle. <br>
+   	<div class="container">
+    <h1 style="color:white; text-align: center;">Tervetuloa vaalikoneeseen!</h1>
+	<p style="color:white;text-align: center;"> Hienoa, että olet päättänyt asettautua ehdolle. <br>
 		Painamalla alla olevaa nappia, pääset vastaamaan kysymyksiin. </p>
+		
 
+	</div>
 
+	<div class="btn-group">
         <a href='/readquestions'>
       
+
+      <button class="button" type=button> Vastaa kysymyksiin</button></a>
       
-      <button type="button">Vastaa kysymyksiin</button></a>
-   
+      <a href='/readtoupdate'>
+      
+      <button class="button" type=button> Muokkaa vastauksia</button></a>
+      
+  	</div>
   </body>
+   <style>
+   
+  .container{
+  position: absolute;
+	left: 50%;
+	top: 30%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+  }
+  .btn-group .button{
+  position: relative;
+  text-align: center;
+  left: 39%;
+  top: 50%;
+  
+  }
+  
+  body {
+  background-image: url('parlamenttiTalo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+  </style>
 </html>

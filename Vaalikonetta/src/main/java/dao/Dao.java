@@ -20,7 +20,7 @@ public class Dao {
 	private String pass;
 	private Connection conn;
 	
-	public Dao(String url, String user, String pass) {		//annetaan tiedot yhteydest‰
+	public Dao(String url, String user, String pass) {		//annetaan tiedot yhteydest√§
 		this.url=url;
 		this.user=user;
 		this.pass=pass;
@@ -84,7 +84,6 @@ public class Dao {
 		}
 	}
 	
-
 	public ArrayList<Answer> saveAnswer(Answer a) {
 		 ArrayList<Answer> list = new ArrayList<>();
 		try {
@@ -98,15 +97,31 @@ public class Dao {
 			pstmt.setString(3, a.getVastaus());
 			pstmt.setString(4, a.getKommentti());
 			pstmt.executeUpdate();
-			System.out.println("Tiedot l‰hetetty tietokantaan");
+			System.out.println("Tiedot l√§hetetty tietokantaan");
 			
 			return list;
 			
 		}
 		catch(SQLException e) {
-			System.out.println("Tiedot ei l‰hetetty tietokantaan" +e);
+			System.out.println("Tiedot ei l√§hetetty tietokantaan" +e);
 			return null;
+    }
+}
+  
+	public ArrayList<Question> updateQuestions(Question f) {
+		try {
+			String sql="update given answer=? where id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, f.getKysymys());
+			pstmt.setInt(2, f.getId());
+			pstmt.executeUpdate();
+			return readAllQuestion();
+		}
+		catch(SQLException e) {
+			return null;
+		}
+
 	}
-	}
+	
 
 }
