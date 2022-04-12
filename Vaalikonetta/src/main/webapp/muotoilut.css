@@ -1,0 +1,29 @@
+@charset "ISO-8859-1";
+
+.container{
+  position: absolute;
+	left: 50%;
+	top: 30%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+  }
+  .btn-group .button{
+  position: fixed;
+  text-align: center;
+  left: 39%;
+  top: 50%;
+  
+  }
+  .btn-group .button2{
+  position: fixed;
+  text-align: center;
+  left: 55%;
+  top: 50%;
+  
+  }
+  
+  body {
+  background-image: url('parlamenttiTalo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
