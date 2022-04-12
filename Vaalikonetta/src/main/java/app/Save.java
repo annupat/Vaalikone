@@ -23,9 +23,13 @@ import data.Question;
 )
 
 public class Save extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Dao dao;
 	public void init() {
-		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "mona", "Nikunacho69!");
+		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "admin", "salasana");
 	}
 	@Override
 //	private static final long serialVersionUID = 1L;
@@ -65,7 +69,7 @@ public class Save extends HttpServlet {
 			System.out.println("kysymys id:"+kysymys_id);
 			System.out.println("kommentti:"+kommentti);
 																	
-			Answer a = new Answer(ehdokas_id, kysymys_id, vastaus);
+			Answer a = new Answer(ehdokas_id, kysymys_id, vastaus, kommentti);
 			
 			ArrayList<Answer> list = null;
 			if (dao.getConnection()) {

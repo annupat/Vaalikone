@@ -6,7 +6,7 @@ public class Answer {
 	private int vastaus;
 	private String kommentti;
 
-	public Answer(String ehdokas_id, String kysymys_id, String vastaus, String kommentti) {
+	public Answer(String ehdokas_id, int kysymys_id, String vastaus, String kommentti) {
 		// TODO Auto-generated constructor stub
 		setKysymys_id(kysymys_id);
 		this.vastaus = Integer.parseInt(vastaus);
@@ -68,20 +68,10 @@ public class Answer {
 	public String getKommentti() {
 		return kommentti;
 	}
-
-
-public class Answer {
-	private String vastaus = "";
-	private int kysymys_id;
-	private String ehdokas_id;
-	private String kommentti;
 	
-	public Answer(String ehdokas_id, int kysymys_id, String vastaus) {
-		this.kommentti = "ehdokkaan " + ehdokas_id + " vastaus kysymykseen " + kysymys_id;
-		this.vastaus = vastaus;
-		this.ehdokas_id = ehdokas_id;
-		this.kysymys_id = kysymys_id;
+	public void setKommentti(String kommentti) {
+		this.kommentti = kommentti;
 	}
-}
+
 
 }
