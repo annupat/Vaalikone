@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import data.Question;
+import data.Answer;
 
 import java.sql.Connection;
 
@@ -19,7 +20,7 @@ public class Dao {
 	private String pass;
 	private Connection conn;
 	
-	public Dao(String url, String user, String pass) {		//annetaan tiedot yhteydest�
+	public Dao(String url, String user, String pass) {		//annetaan tiedot yhteydestä
 		this.url=url;
 		this.user=user;
 		this.pass=pass;
@@ -62,6 +63,8 @@ public class Dao {
 		}
 		}
 	
+
+	
 	public Question readQuestion(String kysymys_id) {							//luetaan tietty kysymys
 		Question q=null;
 		try {
@@ -80,6 +83,33 @@ public class Dao {
 			return null;
 		}
 	}
+	
+	public ArrayList<Answer> saveAnswer(Answer a) {
+		 ArrayList<Answer> list = new ArrayList<>();
+		try {
+			String sql = "Insert into vastaukset (ehdokas_id, kysymys_id, vastaus, kommentti) values (?,?,?,?);";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			System.out.println("ehdokas_id" + a.getEhdokasId());
+			System.out.println("kysymys_id" + a.getKysymysId());
+			pstmt.setString(1, a.getEhdokasId());
+			pstmt.setInt(2, a.getKysymysId());
+			pstmt.setString(3, a.getVastaus());
+			pstmt.setString(4, a.getKommentti());
+			pstmt.executeUpdate();
+			System.out.println("Tiedot lähetetty tietokantaan");
+			
+			return list;
+			
+		}
+		catch(SQLException e) {
+			System.out.println("Tiedot ei lähetetty tietokantaan" +e);
+			return null;
+    }
+}
+  
+//	public ArrayList<Question> updateQuestions(Question f) {
+
 	public ArrayList<Question> updateQuestions(Question q) {
 		try {
 			String sql="update given answer=? where id=?";
@@ -92,6 +122,8 @@ public class Dao {
 		catch(SQLException e) {
 			return null;
 		}
-	}
-	}
 
+	}
+	
+
+}

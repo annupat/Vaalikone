@@ -3,6 +3,8 @@
     
 <%@ page import="java.util.ArrayList" %>      
 <%@ page import="data.Question" %>    
+<%@ page import="data.Answer" %> 
+
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -17,21 +19,45 @@
 <h2>Vaalikone</h2>
 <h3>Vastaa kysymyksiin:</h3>
 
+<form action='Save' method= 'post'>
+ Ehdokas id: <input type='text' name='ehdokas_id' value='${requestScope.answer.ehdokas_id}'><br>
 
-	<!--  -----------------RADIO BUTTON  ------ -->
 <% 
   		ArrayList<Question> questionList = (ArrayList<Question>) request.getAttribute("questionlist"); //jsp voi sis‰lt‰‰ java-koodia 
 
   	for (int i = 0; questionList != null && i < questionList.size(); i++) {  
   		Question q = questionList.get(i); 
   		out.println(q.getId() + ". " + q.getKysymys() +  
-  				"<div>" + "<input type='radio' name='vastaus_"+i +"value='tem' id=1 checked='checked'>t‰ysin eri mielt‰</div>"
-  		+ "   " + "<div><input type='radio' name='vastaus_"+i +"value='jem' id=2 checked='checked'>jokseenkin eri mielt‰" + "</div>"+ "   " + 
-  				"<div><input type='radio' name='vastaus_"+i + "value='eos' id=3 checked='checked'>en osaa sanoa" + "</div>"+ "   " + 
-  			"<div><input type='radio' name='vastaus_" +i +"value='jsm' id=4 checked='checked'>jokseenkin samaa mielt‰" + "</div>"+ "   " + 
-  				"<div><input type='radio' name='vastaus_"+i +"value='tsm' id=5 checked='checked'>t‰ysin samaa mielt‰" + "</div>");
-  	} 
- %>
+  				"<div>" + "<input type='radio' name='vastaus_"+i +"'"+" value='1' id=1 >t‰ysin eri mielt‰</div>"
+  		+ "   " + "<div><input type='radio' name='vastaus_"+i +"'"+" value='2' id=2 >jokseenkin eri mielt‰" + "</div>"+ "   " + 
+  				"<div><input type='radio' name='vastaus_"+i + "'"+" value='3' id=3 >en osaa sanoa" + "</div>"+ "   " + 
+  			"<div><input type='radio' name='vastaus_" +i +"'"+" value='4' id=4 >jokseenkin samaa mielt‰" + "</div>"+ "   " + 
+  				"<div><input type='radio' name='vastaus_"+i +"'"+" value='5' id=5 >t‰ysin samaa mielt‰" + "</div>");
+  	} 	
+
+  		
+ %> 
+ 
+  <input type='submit' name='ok' value='Tallenna vastaukset'>
+ </form> 
+ 
+ 
+<%--  <%  --%>
+<!-- //   		ArrayList<Question> questionList = (ArrayList<Question>) request.getAttribute("questionlist"); //jsp voi sis‰lt‰‰ java-koodia  -->
+
+<!-- //   	for (int i = 0; questionList != null && i < questionList.size(); i++) {   -->
+<!-- //   		Question q = questionList.get(i);  -->
+<!-- //   		out.println(q.getId() + ". " + q.getKysymys() +   -->
+<!-- //   				"<div>" + "<input type='radio' name='vastaus_"+i +"'"+" value='1' id=1 >t‰ysin eri mielt‰</div>" -->
+<!-- //   		+ "   " + "<div><input type='radio' name='vastaus_"+i +"'"+" value='2' id=2 >jokseenkin eri mielt‰" + "</div>"+ "   " +  -->
+<!-- //   				"<div><input type='radio' name='vastaus_"+i + "'"+" value='3' id=3 >en osaa sanoa" + "</div>"+ "   " +  -->
+<!-- //   			"<div><input type='radio' name='vastaus_" +i +"'"+" value='4' id=4 >jokseenkin samaa mielt‰" + "</div>"+ "   " +  -->
+<!-- //   				"<div><input type='radio' name='vastaus_"+i +"'"+" value='5' id=5 >t‰ysin samaa mielt‰" + "</div>"); -->
+<!-- //   	} 	 -->
+
+  		
+<%--  %>  --%>
+ 
  
 
 	<!-- ------------------------- EI TOIMI! ------------------------->
