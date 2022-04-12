@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,6 +59,8 @@ public class ReadAnswer extends HttpServlet {
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/deleteanswer.jsp");		
 		rd.forward(request, response);
 		
+		ServletContext servletcontext = getServletContext();
+		servletcontext.setAttribute("ehdokas_id", ehdokas_id);
 	}
 
 

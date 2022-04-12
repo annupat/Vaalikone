@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +27,8 @@ public class DeleteAnswer extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 	     throws IOException, ServletException {
 		String kysymys_id=request.getParameter("kysymys_id");
-		String ehdokas_id=request.getParameter("ehdokas_id");
+		ServletContext servletcontext = getServletContext();
+		String ehdokas_id=(String) servletcontext.getAttribute("ehdokas_id");
 		ArrayList<Answer> list=null;
 		if (dao.getConnection()) {
 			list=dao.deleteAnswer(ehdokas_id, kysymys_id);
@@ -34,7 +36,7 @@ public class DeleteAnswer extends HttpServlet {
 			System.out.println("Ehdokas_id: " + ehdokas_id);
 		}	
 		request.setAttribute("answerlist", list);	
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/deleteanswer.jsp");  
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/poistettu.jsp");  
 		rd.forward(request, response);
 	}
 }
