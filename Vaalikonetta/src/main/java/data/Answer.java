@@ -69,8 +69,19 @@ public class Answer {
 		return kommentti;
 	}
 
-	public void setKommentti(String kommentti) {
-		this.kommentti = kommentti;
+
+public class Answer {
+	private String vastaus = "";
+	private int kysymys_id;
+	private String ehdokas_id;
+	private String kommentti;
+	
+	public Answer(String ehdokas_id, int kysymys_id, String vastaus) {
+		this.kommentti = "ehdokkaan " + ehdokas_id + " vastaus kysymykseen " + kysymys_id;
+		this.vastaus = vastaus;
+		this.ehdokas_id = ehdokas_id;
+		this.kysymys_id = kysymys_id;
 	}
+}
 
 }

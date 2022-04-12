@@ -19,12 +19,14 @@ public class Dao {
 	private String pass;
 	private Connection conn;
 
-	public Dao(String url, String user, String pass) {
-		this.url = url;
-		this.user = user;
-		this.pass = pass;
+	
+	public Dao(String url, String user, String pass) {	
+		this.url=url;
+		this.user=user;
+		this.pass=pass;
 
-	}
+  }
+
 
 	public boolean getConnection() {
 		try {
@@ -78,6 +80,8 @@ public class Dao {
 			return null;
 		}
 	}
+  //	public Question readQuestion(String kysymys_id) {							//luetaan tietty kysymys
+	//	Question q=null;
 
 	public ArrayList<Answer> readAnswer(String ehdokas_id) {
 		ArrayList<Answer> list = new ArrayList<>();
@@ -111,10 +115,50 @@ public class Dao {
 			pstmt.executeUpdate();
 			System.out.println("Vastaus kysymykseen nro " + kysymys_id + " poistettu");
 			return readAllAnswer();
+      
 		} catch (SQLException e) {
 			System.out.println(e);
 			return null;
 		}
-	}
-
 }
+	
+	public ArrayList<Answer> saveAnswer(Answer a) {
+		 ArrayList<Answer> list = new ArrayList<>();
+		try {
+			String sql = "Insert into vastaukset (ehdokas_id, kysymys_id, vastaus, kommentti) values (?,?,?,?);";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			System.out.println("ehdokas_id" + a.getEhdokasId());
+			System.out.println("kysymys_id" + a.getKysymysId());
+			pstmt.setString(1, a.getEhdokasId());
+			pstmt.setInt(2, a.getKysymysId());
+			pstmt.setString(3, a.getVastaus());
+			pstmt.setString(4, a.getKommentti());
+			pstmt.executeUpdate();
+			System.out.println("Tiedot lähetetty tietokantaan");
+			
+			return list;
+			
+		}
+		catch(SQLException e) {
+			System.out.println("Tiedot ei lähetetty tietokantaan" +e);
+			return null;
+    }
+}
+
+	public ArrayList<Question> updateQuestions(Question q) {
+		try {
+			String sql="update given answer=? where id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, q.getKysymys());
+			pstmt.setInt(2, q.getId());
+			pstmt.executeUpdate();
+			return readAllQuestion();
+		}
+		catch(SQLException e) {
+			return null;
+		}
+
+	}
+}
+

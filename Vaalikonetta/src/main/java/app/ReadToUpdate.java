@@ -1,5 +1,5 @@
 package app;
-//t‰‰ll‰ muutos
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -10,36 +10,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import dao.Dao;
 import data.Question;
 
 /**
- * Servlet implementation class ReadQuestions
+ * Servlet implementation class ReadToUpdate
  */
-@WebServlet("/readquestions")
-public class ReadQuestions extends HttpServlet {
+@WebServlet("/readtoupdate")
+public class ReadToUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Dao dao=null;
-	
-	@Override
+	private Dao dao;
 	public void init() {
 		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "timojaakko", "T1mo67");
-	}   
-	
+	}
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReadQuestions() {
+    public ReadToUpdate() {
         super();
-        
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		ArrayList<Question> list=null;										//
 		if (dao.getConnection()) {		
 			list=dao.readAllQuestion();		
@@ -49,7 +45,7 @@ public class ReadQuestions extends HttpServlet {
 		}
 		request.setAttribute("questionlist", list);		
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/vastaa.jsp");		
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/p‰ivit‰.jsp");		
 		rd.forward(request, response);
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -57,3 +53,4 @@ public class ReadQuestions extends HttpServlet {
 	
 
 }
+

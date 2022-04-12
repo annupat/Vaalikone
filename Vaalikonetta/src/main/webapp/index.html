@@ -1,34 +1,68 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<head>
-<meta http-equiv="content-type"
-	content="application/xhtml+xml; charset=UTF-8" />
-<title>Vaalikone</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fi">
+  <head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+    <title>Vaalikone</title>
+  </head>
+ 
+  
+  <body>
+   	<div class="container">
+    <h1 style="color:white; text-align: center;">Tervetuloa vaalikoneeseen!</h1>
+	<p style="color:white;text-align: center;"> Hienoa, että olet päättänyt asettautua ehdolle. <br>
+		Painamalla alla olevaa nappia, pääset vastaamaan kysymyksiin tai muuttamaan aiemmin antamiasi vastauksia. </p>
+		
 
-<body>
-	<h1>Tervetuloa vaalikoneeseen!</h1>
-	<p>
-		Hienoa, että olet päättänyt asettautua ehdolle. <br> Painamalla
-		alla olevaa nappia, pääset vastaamaan kysymyksiin.
-	</p>
+	</div>
 
-	<a href='/readquestions'>
+	<div class="btn-group">
+        <a href='/readquestions'>
+      
 
-		<button type="button">Vastaa kysymyksiin</button>
-	</a>
-	<br>
-	<br>
-	<br>
-
-<form action='/readanswer'>
+      <button class="button" type=button> Vastaa kysymyksiin</button></a>
+      
+      <a href='/readtoupdate'>
+      
+      <button class="button2" type=button> Muokkaa vastauksia</button></a>
+    
+    <form action='/readanswer'>
   <label for="ehdokas_id">Ehdokasnumerosi:</label>
   <input type="text" id="ehdokas_id" name="ehdokas_id"><br><br>
   <input type="submit" value="Poista vastauksia">
 </form>
 
+      
+  	</div>
+  </body>
+   <style>
+   
+  .container{
+  position: absolute;
+	left: 50%;
+	top: 30%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+  }
+  .btn-group .button{
+  position: fixed;
+  text-align: center;
+  left: 39%;
+  top: 50%;
+  
+  }
+    .btn-group .button2{
+  position: fixed;
+  text-align: center;
+  left: 55%;
+  top: 50%;
+  
+  }
+  
+  body {
+  background-image: url('parlamenttiTalo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+  </style>
 
-
-
-</body>
 </html>
