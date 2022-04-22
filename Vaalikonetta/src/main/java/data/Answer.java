@@ -10,6 +10,9 @@ public class Answer {
 		// TODO Auto-generated constructor stub
 		setKysymys_id(kysymys_id);
 		this.vastaus = Integer.parseInt(vastaus);
+		this.ehdokas_id = Integer.parseInt(ehdokas_id);
+		this.kommentti = "ehdokkaan " + ehdokas_id + " vastaus kysymykseen " + kysymys_id;
+		
 	}
 
 	public Answer() {

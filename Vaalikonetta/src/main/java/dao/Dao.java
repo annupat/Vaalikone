@@ -13,6 +13,7 @@ import data.Answer;
 
 import java.sql.Connection;
 
+
 public class Dao {
 	private String url;
 	private String user;
@@ -80,8 +81,6 @@ public class Dao {
 			return null;
 		}
 	}
-  //	public Question readQuestion(String kysymys_id) {							//luetaan tietty kysymys
-	//	Question q=null;
 
 	public ArrayList<Answer> readAnswer(String ehdokas_id) {
 		ArrayList<Answer> list = new ArrayList<>();
@@ -114,7 +113,7 @@ public class Dao {
 			pstmt.setString(2, kysymys_id);
 			pstmt.executeUpdate();
 			System.out.println("Vastaus kysymykseen nro " + kysymys_id + " poistettu");
-			return readAllAnswer();
+			return readAnswer(ehdokas_id);
       
 		} catch (SQLException e) {
 			System.out.println(e);
@@ -145,17 +144,24 @@ public class Dao {
 			return null;
     }
 }
+	/**
+	 * @author TjWidgren
+	 * Metodi jolla p‰ivitet‰‰n vastaukset ja tallennetaan ne tietokantaan.
+	 *
+	 */
 
-	public ArrayList<Question> updateQuestions(Question q) {
+	public ArrayList<Answer> updateAnswers(String ehdokas_id, String kysymys_id, String vastaus) {
 		try {
-			String sql="update given answer=? where id=?";
+			String sql="update vastaukset set vastaus=? where kysymys_id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, q.getKysymys());
-			pstmt.setInt(2, q.getId());
+			pstmt.setString(1, vastaus);
+			pstmt.setString(2, kysymys_id);
 			pstmt.executeUpdate();
-			return readAllQuestion();
+			System.out.println("Tiedot l√§hetetty tietokantaan");
+			return readAnswer(ehdokas_id);
 		}
 		catch(SQLException e) {
+			System.out.println("Tiedot ei l√§hetetty tietokantaan" +e);
 			return null;
 		}
 

@@ -1,5 +1,7 @@
 @charset "ISO-8859-1";
 
+/* ensimmäisen sivun muotoilut */
+
 .container{
   position: absolute;
 	left: 50%;
@@ -7,23 +9,21 @@
 	transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
   }
-  .btn-group .button{
-  position: fixed;
+  .button{
+  position: relative;
   text-align: center;
-  left: 39%;
-  top: 50%;
+  left: 14%;
+  top: 45%;
   
   }
-  .btn-group .button2{
-  position: fixed;
-  text-align: center;
-  left: 55%;
-  top: 50%;
+
   
-  }
   
-  body {
-  background-image: url('parlamenttiTalo.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  }
+  
+
+  
+  /*Päivitä sivun muotoilut*/
+  
+
+  
+  

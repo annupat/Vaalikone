@@ -3,15 +3,16 @@
   <head>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
     <title>Vaalikone</title>
+    <link href="muotoilut.css">
   </head>
-  <link rel="stylesheet" href="muotoilut.css">
- 
+  
+ <!-- Indexi sivu joka näkyy ensimmäisenä käyttäjälle. Ensimmäiseltä sivulta pääsee muihin rakennettuihin sivuihin ja napeilla toteuttamaan ohjelmoituja toimintoja -->
   
   <body>
    	<div class="container">
     <h1 style="color:white; text-align: center;">Tervetuloa vaalikoneeseen!</h1>
 	<p style="color:white;text-align: center;"> Hienoa, että olet päättänyt asettautua ehdolle. <br>
-		Painamalla alla olevaa nappia, pääset vastaamaan kysymyksiin tai muuttamaan aiemmin antamiasi vastauksia. </p>
+		Painamalla alla olevia painikkeita, pääset vastaamaan kysymyksiin, poistamaan vastauksiasi tai muuttamaan antamiasi vastauksia. </p>
 		
 
 	</div>
@@ -21,18 +22,57 @@
       
 
       <button class="button" type=button> Vastaa kysymyksiin</button></a>
-      
-      <a href='/readtoupdate'>
-      
-      <button class="button2" type=button> Muokkaa vastauksia</button></a>
     
-    <form action='/readanswer'>
-  <label for="ehdokas_id">Ehdokasnumerosi: </label>
-  <input type="text" id="ehdokas_id" name="ehdokas_id"><br><br>
-  <input type="submit" value="Poista vastauksia">
+    <form action='/readanswer' class="formi">
+  <label for="ehdokas_id"></label>
+  <input type="text" id="ehdokas_id" name="ehdokas_id" placeholder="Ehdokasnumerosi"><br><br>
+  <input class="button3" type="submit" value="Poista vastauksia">
+  
+  
+</form>
+
+    <form action='/readtoupdate' class="formi1">
+  <label for="ehdokas_id"></label>
+  <input type="text" id="ehdokas_id" name="ehdokas_id" placeholder="Ehdokasnumerosi"><br><br>
+  <input class="button5" type="submit" value="Muokkaa vastauksia">
+  
+  
 </form>
 
       
   	</div>
   </body>
+  <style>
+  body {
+  background-image: url('parlamenttiTalo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+  .button{
+  position: relative;
+  text-align: center;
+  left: 45%;
+  top: 45%;
+  }
+  .formi {
+  position: fixed;
+  left: 43%;
+  top: 55%;
+  }
+  .button3{
+  position: fixed;
+  left: 45%;
+  top: 60%;
+  }
+  .formi1{
+  position: fixed;
+  left: 43%;
+  top: 70%;}
+  
+  .button5{
+  position: fixed;
+  left: 45%;
+  top: 75%;
+  }
+  </style>
 </html>

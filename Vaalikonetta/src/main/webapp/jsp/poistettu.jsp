@@ -25,5 +25,7 @@ for (int i=0;answerList!=null && i<answerList.size();i++){
 
 
 %>
+
+<a href= '/index.html'><button type="button">Etusivulle</button></a>
 </body>
 </html>
