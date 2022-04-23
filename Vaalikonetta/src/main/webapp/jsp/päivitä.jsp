@@ -17,7 +17,7 @@
 <body>
 <h2>Muokkaa vastauksiasi</h2>
 
-<!-- EI TOIMI!-->
+
 	<div class="questions">
 <% 	
 ArrayList<Answer> answerList=(ArrayList<Answer>)request.getAttribute("answerlist");			
