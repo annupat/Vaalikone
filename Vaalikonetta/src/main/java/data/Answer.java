@@ -1,5 +1,10 @@
 package data;
 
+/**
+ * Answer-luokka m‰‰ritt‰‰ Answer-muuttujan parametrit ja sis‰lt‰‰ getterit ja setterit
+ * @author annukkapatrikainen ja monaj‰‰skel‰inen
+ *
+ */
 public class Answer {
 	private int ehdokas_id;
 	private int kysymys_id;
@@ -12,7 +17,7 @@ public class Answer {
 		this.vastaus = Integer.parseInt(vastaus);
 		this.ehdokas_id = Integer.parseInt(ehdokas_id);
 		this.kommentti = "ehdokkaan " + ehdokas_id + " vastaus kysymykseen " + kysymys_id;
-		
+
 	}
 
 	public Answer() {
@@ -23,7 +28,6 @@ public class Answer {
 		return ehdokas_id;
 	}
 
-
 	public void setEhdokas_id(int ehdokas_id) {
 		this.ehdokas_id = ehdokas_id;
 	}
@@ -32,7 +36,7 @@ public class Answer {
 		try {
 			this.ehdokas_id = Integer.parseInt(ehdokas_id);
 		} catch (NumberFormatException | NullPointerException e) {
-			// Do nothing - the value of id won't be changed
+		
 		}
 	}
 
@@ -48,7 +52,7 @@ public class Answer {
 		try {
 			this.kysymys_id = Integer.parseInt(kysymys_id);
 		} catch (NumberFormatException | NullPointerException e) {
-			// Do nothing - the value of id won't be changed
+			
 		}
 	}
 
@@ -64,17 +68,16 @@ public class Answer {
 		try {
 			this.vastaus = Integer.parseInt(vastaus);
 		} catch (NumberFormatException | NullPointerException e) {
-			// Do nothing - the value of id won't be changed
+			
 		}
 	}
 
 	public String getKommentti() {
 		return kommentti;
 	}
-	
+
 	public void setKommentti(String kommentti) {
 		this.kommentti = kommentti;
 	}
-
 
 }
