@@ -1,6 +1,7 @@
 package app;
-//t‰‰ll‰ muutos
+
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -14,9 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Dao;
 import data.Question;
 
-/**
- * Servlet implementation class ReadQuestions
- */
+
 @WebServlet("/readquestions")
 public class ReadQuestions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,20 +23,16 @@ public class ReadQuestions extends HttpServlet {
 	
 	@Override
 	public void init() {
-		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "timojaakko", "T1mo67");
+		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "admin", "salasana");
 	}   
 	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public ReadQuestions() {
         super();
         
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<Question> list=null;										//
@@ -51,7 +46,7 @@ public class ReadQuestions extends HttpServlet {
 		
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/vastaa.jsp");		
 		rd.forward(request, response);
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	

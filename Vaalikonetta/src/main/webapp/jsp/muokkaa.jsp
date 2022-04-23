@@ -1,46 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+        
 <%@ page import="java.util.ArrayList" %>      
-<%@ page import="data.Answer" %>    
-    
-    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ page import="data.Answer" %>      
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Vaalikone</title>
-
 </head>
 <body>
-<h2>Muokkaa vastauksiasi</h2>
-
-
-	<div class="questions">
+<h2>Muokkaa vastauksia</h2>
+<div>
 <% 	
 ArrayList<Answer> answerList=(ArrayList<Answer>)request.getAttribute("answerlist");			
 
 for (int i=0;answerList!=null && i<answerList.size();i++){
 	Answer a=answerList.get(i);
- 	out.println("Vastaus kysymykseen " + a.getKysymys_id()+": "+a.getVastaus()+ "    " +
-	"<a href='update?kysymys_id=" + a.getKysymys_id() + 
- 	"'< button type='button'>Muokkaa vastausta</button></a>" + 
+ 	out.println("Vastaus kysymykseen " + a.getKysymys_id()+": "+a.getVastaus()+ "    " + 
 	"<br>");
 }
 
 %>
 </div>
 
-<div class="btn">
-<a href='/readtoupdate'>
-      
-      <button class="button4" type=button> Tallenna uudet vastaukset</button></a>
-
-		</div>
-
-
+<form action='update' method='post'>
+Kysymys id: <input type='text' name='kysymys_id' value='${requestScope.answer.kysymys_id}'><br> 
+Uusi vastaus: <input type='text' name='vastaus' value='${requestScope.answer.vastaus}'><br>
+<input type='submit' name='ok' value='Send'> 
+</form>
 </body>
 <style>
 .btn .button {

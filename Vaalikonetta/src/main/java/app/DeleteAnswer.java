@@ -1,3 +1,4 @@
+
 package app;
 
 import java.io.IOException;
@@ -56,4 +57,3 @@ public class DeleteAnswer extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/poistettu.jsp");
 		rd.forward(request, response);
 	}
-}

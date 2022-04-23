@@ -9,5 +9,7 @@
 <body>
 <h1>Vastaukset tallennettu onnistuneesti</h1>
 <h2>Kiitos vastauksista!</h2>
+
+<a href= '/index.html'><button type="button">Etusivulle</button></a>
 </body>
 </html>
