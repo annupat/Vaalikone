@@ -17,6 +17,10 @@ import data.Question;
 /**
  * Servlet implementation class Save
  */
+/**
+ * @author Mona J‰‰skel‰inen
+ *
+ */
 @WebServlet(
 		name = "Save",
 		urlPatterns = {"/Save"}
@@ -24,7 +28,9 @@ import data.Question;
 
 public class Save extends HttpServlet {
 	/**
-	 * 
+	 * Luokka tallentaa ehdokkaan vastaukset Dao-luokan metodin avulla, 
+	 * johon parametrit, kuten vastaus_ ja ehdokas_id, haetaan vastaa.jsp. 
+	 * Lopuksi k‰ytt‰j‰lle n‰kyy tallennettu.jsp merkkin‰, ett‰ tallennus onnistui.
 	 */
 	private static final long serialVersionUID = 1L;
 	private Dao dao;
