@@ -13,6 +13,14 @@ import data.Answer;
 
 import java.sql.Connection;
 
+/**
+ * @author Mona
+ *
+ */
+/**
+ * @author Mona
+ *
+ */
 public class Dao {
 	private String url;
 	private String user;
@@ -144,7 +152,11 @@ public class Dao {
 			return null;
 		}
 	}
-
+	/**
+	 * 
+	 * @author Mona J‰‰skel‰inen
+	 * Tallentaa vastaukset tietokantaan vastaukset -tauluun
+	 */
 	public ArrayList<Answer> saveAnswer(Answer a) {
 		ArrayList<Answer> list = new ArrayList<>();
 		try {

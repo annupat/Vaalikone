@@ -16,6 +16,11 @@ import dao.Dao;
 import data.Question;
 
 
+/**
+ * @author Mona J‰‰skel‰inen & Annukka Patrikainen
+ *Luokka lukee tietokannasta kysymykset dao-luokan metodin avulla. Kysymyslista l‰hetet‰‰n vastaa.jsp:lle.
+ *
+ */
 @WebServlet("/readquestions")
 public class ReadQuestions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
