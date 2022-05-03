@@ -25,6 +25,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.mysql.jdbc.Statement;
 
+import dao.Dao2;
 import data.AdminQuestion;
 
 @WebServlet(
@@ -33,6 +34,18 @@ import data.AdminQuestion;
 		)
 
 public class AdminReadQuestions extends HttpServlet {
+	
+	@Override 
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException {
+		doGet(request, response);
+		AdminQuestion adminQuestion = readAllAdminQuestions(request);
+		Dao2 dao = new Dao2();
+		ArrayList<AdminQuestion> list = dao.readAllAdminQuestions();
+		printAdminQuestionList(out, list);
+		dao.close();
+		
+	}
 	@Override 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
@@ -74,21 +87,16 @@ public class AdminReadQuestions extends HttpServlet {
 		int count = stmt.executeUpdate("select * from kysymykset");
 		return count; 
 	}
+	
+	private void printAdminQuestionList(PrintWriter out, ArrayList<AdminQuestion> list) {
+		out.println("<ul>");
+		for (AdminQuestion q:list) {
+			out.println("<li>"+q);
+		}
+		out.println("</ul>");
+	}
 }
-//public class AdminReadQuestions {
-//	@GET
-//	@Path("/allquestions")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	
-//	public ArrayList<AdminQuestion> readAllQuestions() {
-//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("vaalikone");
-//		EntityManager em = emf.createEntityManager();
-//		
-//		ArrayList<AdminQuestion> list = (ArrayList<AdminQuestion>) em.createNamedQuery("select a from AdminQuestion a").getResultList();
-//		return list;
-//	}
-//		
-//}
+
 
 
 
