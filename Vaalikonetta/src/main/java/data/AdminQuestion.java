@@ -9,33 +9,40 @@ import javax.persistence.Id;
 public class AdminQuestion {
 
 		@Id
-		@GeneratedValue(strategy = GenerationType.AUTO)
+		@GeneratedValue(strategy = GenerationType.AUTO)  //auton tilalla IDENTITY
 		private int kysymys_id;
 		private String kysymys;
 		
 		public AdminQuestion() {
-			super();
+//			super();
+		}
+		
+		public AdminQuestion(String kysymys) {
+			this.kysymys = kysymys;
+		}
+		
+		public AdminQuestion(int kysymys_id, String kysymys) {
+			this.kysymys_id=kysymys_id;
+			this.kysymys = kysymys;
 		}
 
 		public AdminQuestion(String kysymys_id, String kysymys) {
 			// TODO Auto-generated constructor stub
-			setId(kysymys_id);
+//			setId(kysymys_id);
+			this.setKysymys_id(kysymys_id);
 			this.kysymys = kysymys;
 		}
-
-		public int getId() {
+		public int getKysymys_id() {
 			return kysymys_id;
 		}
 
-		public void setId(int id) {
-			this.kysymys_id = id;
+		public void setKysymys_id(int kysymys_id) {
+			this.kysymys_id = kysymys_id;
 		}
-
-		public void setId(String id) {
+		public void setKysymys_id(String kysymys_id) {
 			try {
-				this.kysymys_id = Integer.parseInt(id);
+				this.kysymys_id = Integer.parseInt(kysymys_id);
 			} catch (NumberFormatException | NullPointerException e) {
-
 			}
 		}
 
