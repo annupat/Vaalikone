@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+    <title>Hello App Engine</title>
+  </head>
+<script>
+function sendQuestion(form){
+	var question=new Object();
+	question.kysymys=form.kysymys.value;
+	var jsonQuestion=JSON.stringify(question);
+	
+	var xmlhttp=new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+		    document.getElementById("result").innerHTML = this.responseText;
+		  	//Empty form fields
+		    form.kysymys.value="";
+	  }
+	};
+	xmlhttp.open("POST", "/rest/questionservice/addquestion", true);
+	xmlhttp.setRequestHeader("Content-type", "application/json");
+	xmlhttp.send(jsonQuestion);	
+}
+</script>
+  <body>
+    <h1>Fill in!</h1>
+	<form>
+	Uusi kysymys: <input type='text' name='kysymys' value='Pike'><br>
+	<input type='button' name='ok' value='OK' onclick='sendQuestion(this.form);'><br>
+	</form>
+	<p id='result'>Kysymyksesi on tallennettu!</p>
+  </body>
+</html>
