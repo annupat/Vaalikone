@@ -53,4 +53,18 @@ public class QuestionService {
 		List<AdminQuestion> list=adminReadQuestion();		
 		return list;
 	}	
+	
+	@POST
+	@Path("/updatequestion")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<AdminQuestion> updateAdminQuestion(AdminQuestion kysymys) {
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(kysymys);
+		em.getTransaction().commit();
+		List<AdminQuestion> list=adminReadQuestion();
+		return list;
+		
+	}
 }
