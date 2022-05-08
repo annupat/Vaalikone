@@ -38,7 +38,9 @@ public class QuestionService {
 		em.getTransaction().begin();
 		List<AdminQuestion> list=em.createQuery("select a from kysymykset a").getResultList();		
 		em.getTransaction().commit();
+		System.out.println(list);
 		return list;
+		
 	}	
 	
 	@POST
