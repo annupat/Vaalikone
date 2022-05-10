@@ -23,7 +23,7 @@ import org.apache.commons.codec.binary.Base64;
 								DispatcherType.INCLUDE,
 								DispatcherType.ERROR
 						}
-						, urlPatterns = {"/adminreadquestions"})
+						, urlPatterns = {"/rest/questionservice/readadminquestion"})
 
 public class AuthFilter implements Filter {
 	Hashtable<String, String> ValidUsers = new Hashtable<>();

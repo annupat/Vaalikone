@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 
 import data.AdminQuestion;
+import data.Kysymykset;
 
 public class Dao2 {
 	

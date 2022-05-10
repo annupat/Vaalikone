@@ -5,6 +5,10 @@
 	
 	<persistence-unit name="vaalikonetta">
 	<class>data.AdminQuestion</class>
+	<class>data.Ehdokkaat</class>
+	<class>data.Kysymykset</class>
+	<class>data.Vastaukset</class>
+	<class>data.VastauksetPK</class>
 		
 <!--  jdbcDriver == class, where in the implementation of database functions--> 
 <!--  jdbcUrl == address to the database--> 
@@ -16,7 +20,7 @@
 	    <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/vaalikone" />
 	    <property name="javax.persistence.jdbc.user" value="admin" />
 	    <property name="javax.persistence.jdbc.password" value="salasana" />
- 	    <property name="eclipselink.ddl-generation" value="create-tables" />
+ <!--  <property name="eclipselink.ddl-generation" value="create-tables" />-->
 	</properties>
 	
 	</persistence-unit>
