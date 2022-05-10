@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "kysymykset")
 public class AdminQuestion {
 
 		@Id
@@ -52,6 +54,10 @@ public class AdminQuestion {
 
 		public void setKysymys(String kysymys) {
 			this.kysymys = kysymys;
+		}
+		
+		public String toString() {
+			return this.kysymys_id+": "+this.kysymys;
 		}
 
 }

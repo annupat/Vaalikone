@@ -39,13 +39,29 @@ public class AdminReadQuestions extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 		doGet(request, response);
-		AdminQuestion adminQuestion = readAllAdminQuestions(request);
+	//	AdminQuestion adminQuestion = readAllAdminQuestions(request);
 		Dao2 dao = new Dao2();
-		ArrayList<AdminQuestion> list = dao.readAllAdminQuestions();
+		ArrayList<AdminQuestion> list = dao.readAllAdminAdminQuestion();
 		printAdminQuestionList(out, list);
 		dao.close();
-		
+		}
+
+	private void printAdminQuestionList(PrintWriter out, ArrayList<AdminQuestion> list) {
+		out.println("<ul>");
+		for (AdminQuestion q:list) {
+			out.println("<li>"+q);
+		}
+		out.println("</ul>");
 	}
+		
+
+//	private AdminQuestion readAllAdminQuestions(HttpServletRequest request) {
+//		// TODO Auto-generated method stub
+//		AdminQuestion adminQuestion = new AdminQuestion();
+//		adminQuestion.setKysymys_id();
+//		return adminQuestion;
+//	}
+
 	@Override 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
@@ -88,13 +104,13 @@ public class AdminReadQuestions extends HttpServlet {
 		return count; 
 	}
 	
-	private void printAdminQuestionList(PrintWriter out, ArrayList<AdminQuestion> list) {
-		out.println("<ul>");
-		for (AdminQuestion q:list) {
-			out.println("<li>"+q);
-		}
-		out.println("</ul>");
-	}
+//	private void printAdminQuestionList(PrintWriter out, ArrayList<AdminQuestion> list) {
+//		out.println("<ul>");
+//		for (AdminQuestion q:list) {
+//			out.println("<li>"+q);
+//		}
+//		out.println("</ul>");
+//	}
 }
 
 
