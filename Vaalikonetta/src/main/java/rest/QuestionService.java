@@ -67,26 +67,26 @@ public class QuestionService {
 	@Path("/addquestion")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Kysymykset> addAdminQuestion(Kysymykset kysymys) {
+	public List<Kysymykset> addAdminQuestion(Kysymykset kysymykset) {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		em.persist(kysymys);
+		em.persist(kysymykset);
 		em.getTransaction().commit();
 		List<Kysymykset> list=adminReadQuestion();		
 		return list;
 	}	
 	
-	@POST
-	@Path("/updatequestion")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<AdminQuestion> updateAdminQuestion(AdminQuestion kysymys) {
-		EntityManager em=emf.createEntityManager();
-		em.getTransaction().begin();
-		em.persist(kysymys);
-		em.getTransaction().commit();
-		List<AdminQuestion> list=adminReadQuestion();
-		return list;
-		
-	}
+//	@POST
+//	@Path("/updatequestion")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	public List<AdminQuestion> updateAdminQuestion(AdminQuestion kysymys) {
+//		EntityManager em=emf.createEntityManager();
+//		em.getTransaction().begin();
+//		em.persist(kysymys);
+//		em.getTransaction().commit();
+//		List<AdminQuestion> list=adminReadQuestion();
+//		return list;
+//		
+//	}
 }

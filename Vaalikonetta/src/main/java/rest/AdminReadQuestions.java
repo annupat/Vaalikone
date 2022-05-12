@@ -42,7 +42,7 @@ public class AdminReadQuestions extends HttpServlet {
 	//	AdminQuestion adminQuestion = readAllAdminQuestions(request);
 		Dao2 dao = new Dao2();
 		ArrayList<AdminQuestion> list = dao.readAllAdminAdminQuestion();
-		printAdminQuestionList(out, list);
+//		printAdminQuestionList(out, list);
 		dao.close();
 		}
 
