@@ -1,31 +1,33 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="fi">
+<html >
 <head>
-<meta http-equiv="content-type"
-	content="application/xhtml+xml; charset=UTF-8" />
+<meta charset="UTF-8" />
 <title>Admin etusivu</title>
-</head><script>
+</head>
+<script>
 	function readQuestions() {
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				var jsonquestionlist = this.responseText;
 				document.getElementById("resultall"),innerHTML = jsonquestionlist;
-				printAllQuestions(questionlist);
+			//	var questionlist = jsonquestionlist;
+				printAllQuestions(jsonquestionlist);
 			}
 		};
-		xmlhttp.open("GET", "/rest/questionservice/readadminquestion", true);
+		xmlhttp.open("GET", "/rest/questionservice/readalladminquestions", true);
 		xmlhttp.send();
 	}
 	function printAllQuestions(list) {
 		var s = "<table border = '1'>";
 		for (var i = 0; i < list.length; i++) {
 			s = s+"<tr>";
-			s = s+"<td>"+list[i].id;
+			s = s+"<td>"+list[i].kysymysId;
 			s = s+"<td>"+list[i].kysymys;
 		}
 		s=s+"<table>";
 		document.getElementById("allquestions").innerHTML=s;
+		
 	}
 </script>
 <body>
