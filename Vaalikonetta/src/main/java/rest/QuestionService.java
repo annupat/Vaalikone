@@ -86,7 +86,7 @@ public class QuestionService {
 		em.getTransaction().begin();
 		em.persist(kysymykset);
 		em.getTransaction().commit();
-		List<Kysymykset> list=readKysymys();		
+		List<Kysymykset> list=adminReadQuestion();		
 		return list;
 	}	
 	
