@@ -19,9 +19,10 @@
     <h2> Kysymysten ylläpito</h2>
     <ol>
                         <!--  TÄMÄ EI TOIMI :/ -->
-<%--         <c:forEach var = "kysymykset" items = "${requestScope.kysymykset }"> --%>
-<%--         <li>${kysymykset} <!--  <a href='/rest/questionservice/deleteadminquestion/${kysymykset.id}'>Poista</a> <a href='../updateadminquestion?id=${kysymykset.id }'>Päivitä</a>  --%>
-<%-- -->    </c:forEach> --%>
+  <c:forEach var="kysymys" items="${requestScope.kysymyslist }">
+	<li>${kysymys} <a href='/rest/kysymysservice/deleteadminquestion/${kysymykset.kysymysId}'>Delete</a> <a href='../readtoupdatefish?id=${kysymykset.kysymysId}'>Update</a>
+</c:forEach>
+ 
 
  
 

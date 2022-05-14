@@ -20,20 +20,11 @@
         <input class="button1" type="submit" value = "Poista kysymys"></form>
         
 <ol>
-<c:forEach var="kysymys" items="${requestScope.kysymyksetlist }">
-	<li>${kysymykset} <a href='/rest/kysymysservice/deletefish/${kysymykset.kysymysId}'>Delete</a> <a href='../readtoupdatefish?id=${kysymykset.kysymysId}'>Update</a>
+<c:forEach var="kysymys" items="${requestScope.kysymyslist }">
+	<li>${kysymys} <a href='/rest/kysymysservice/deleteadminquestion/${kysymykset.kysymysId}'>Delete</a> <a href='../readtoupdatefish?id=${kysymykset.kysymysId}'>Update</a>
 </c:forEach>
 </ol>
 
-	<%
-		ArrayList<Kysymykset> adminQuestionList = (ArrayList<Kysymykset>) request.getAttribute("adminquestionlist");
 
-	for (int i = 0; adminQuestionList != null && i < adminQuestionList.size(); i++) {
-		Kysymykset k = adminQuestionList.get(i);
-		out.println(
-		"kysymys " + k.getKysymysId() + ": " + k.getKysymys() + "    " + "<a href='/delete?kysymys_id="
-				+ k.getKysymysId() + "'< button type='button'>Poista vastaus</button></a>" + "<br>");
-	}
-	%>
 </body>
 </html>
