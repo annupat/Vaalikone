@@ -16,42 +16,60 @@
 <title>Admin etusivu</title>
 </head>
 <body>
-	<ol>
-	<c:forEach var = "kysymys" items = "${requestScope.adminquestionlist }">
-		<li>${kysymykset.kysymys}
-	</c:forEach>
+    <h2> Kysymysten yll‰pito</h2>
+    <ol>
+                        <!--  TƒMƒ EI TOIMI :/ -->
+<%--         <c:forEach var = "kysymykset" items = "${requestScope.kysymykset }"> --%>
+<%--         <li>${kysymykset} <!--  <a href='/rest/questionservice/deleteadminquestion/${kysymykset.id}'>Poista</a> <a href='../updateadminquestion?id=${kysymykset.id }'>P‰ivit‰</a>  --%>
+<%-- -->    </c:forEach> --%>
+
+ 
 
 
-	<c:forEach var = "kysymys" items = "<%=readAllAdminQuestions() %>">
-		<li>${kysymys}
-	</c:forEach>
-	</ol>
-	
-	<button type='button'>Poista kysymys</button><br>
-	<button type='button'>Muokkaa kysymyst‰</button><br>
-	<button type='button'>Lis‰‰ uusi kysymys</button><br>
-
+    <c:forEach var = "kysymykset" items = "<%=readAllAdminQuestions() %>">
+         <li>${kysymykset} 
+     </c:forEach>
+    </ol>
+    
+    <form action='rest/questionservice/deleteadminquestion'>
+        <input class="button1" type="button" value = "Poista kysymys"></form>
+        
+    <form action='rest/questionservice/updateadminquestion'>
+        <input class="button2" type="button" value = "P‰ivit‰ kysymyst‰"></form>
+        
+    <form action='rest/questionservice/addadminquestion'>
+        <input class="button3" type="button" value = "Lis‰‰ kysymys"></form>
+    
 </body>
+<style>
+.button1 {
+    position: fixed;
+    left:30%;
+    top:50%;
+}
+.button2 {
+    position: fixed;
+    left:50%;
+    top:50%;
+}
+.button3 {
+    position: fixed;
+    left:70%;
+    top:50%;
+}
+</style>
 </html>
-	<%
-		ArrayList<Kysymykset> questionList = (ArrayList<Kysymykset>) request.getAttribute("questionlist");
-
-	for (int i = 0; questionList != null && i < questionList.size(); i++) {
-		Kysymykset a = questionList.get(i);
-		out.println("Vastaus kysymykseen " + a.getKysymysId() + ": " + a.getKysymys() + "    " + "<br>");
-	}
-	%>
-	
-	<%!
+<%!
 List<Kysymykset> readAllAdminQuestions() {
-	String uri = "http://127.0.0.1:8080/rest/questionservice/readadminquestion";
-	Client c = ClientBuilder.newClient();
-	WebTarget wt = c.target(uri);
-	Builder b = wt.request();
-	GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {};
-	
-	List<Kysymykset> list = b.get(genericList);
-	return list;
-	
-	}
+    String uri = "http://127.0.0.1:8080/rest/questionservice/readadminquestion";
+    Client c = ClientBuilder.newClient();
+    WebTarget wt = c.target(uri);
+    Builder b = wt.request();
+//    b.header("Authorization", request.getHeader("Authorization"));
+    GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {};
+    
+    List<Kysymykset> list = b.get(genericList);
+    return list;
+    
+    }
 %>
