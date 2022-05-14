@@ -28,61 +28,67 @@ import data.Kysymykset;
 
 @Path ("/questionservice")
 public class QuestionService {
+	
 	EntityManagerFactory emf=Persistence.createEntityManagerFactory("vaalikonetta");
 
 	@GET
-	@Path("/readadminquestion")
+	@Path("/readkysymys")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Kysymykset> adminReadQuestion(@Context HttpServletRequest request, @Context HttpServletResponse response) {
+	public List<Kysymykset> readKysymys() {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		List<Kysymykset> list=em.createQuery("SELECT k FROM Kysymykset k").getResultList();		
+		List<Kysymykset> list=em.createQuery("select k from Kysymys k").getResultList();		
 		em.getTransaction().commit();
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/etusivuAdmin.jsp");
-		request.setAttribute("adminquestionlist", list);
-		System.out.println(list);
-		try {
-			rd.forward(request, response);
-		} catch (ServletException | IOException e) {
-			e.printStackTrace();
-			System.out.println(e);
-		}
 		return list;
-		
 	}	
 	
-	@GET
-	@Path("/readalladminquestions")
+	
+	 @GET
+	    @Path("/readadminquestion")
+	    @Produces(MediaType.APPLICATION_JSON)
+	    @Consumes(MediaType.APPLICATION_JSON)
+	    public List<Kysymykset> adminReadQuestion() {
+	        EntityManager em=emf.createEntityManager();
+	        em.getTransaction().begin();
+	        List<Kysymykset> list=em.createQuery("SELECT k FROM Kysymykset k").getResultList();       
+	        em.getTransaction().commit();
+	        System.out.println(list);
+	        return list;
+	       
+	    }   
+	   
+	    @GET
+	    @Path("/readalladminquestions")
+	    @Produces(MediaType.APPLICATION_JSON)
+	    @Consumes(MediaType.APPLICATION_JSON)
+	    public void readAllAdminQuestions(@Context HttpServletRequest request, @Context HttpServletResponse response) {
+	        EntityManager em=emf.createEntityManager();
+	        em.getTransaction().begin();
+	        List<Kysymykset> list=em.createQuery("SELECT k FROM Kysymykset k").getResultList();       
+	        em.getTransaction().commit();
+	        RequestDispatcher rd = request.getRequestDispatcher("/jsp/etusivuAdmin.jsp");
+	        request.setAttribute("adminquestionlist", list);
+	        try {
+	            rd.forward(request, response);
+	        } catch (ServletException | IOException e) {
+	            e.printStackTrace();
+	            System.out.println(e);
+	        }
+	    }
+	
+	@POST
+	@Path("/addkysymys")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void readAllAdminQuestions(@Context HttpServletRequest request, @Context HttpServletResponse response) {
+	public List<Kysymykset> addKysymys(Kysymykset kysymykset) {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		List<Kysymykset> list=em.createQuery("SELECT k FROM Kysymykset k").getResultList();		
+		em.persist(kysymykset);
 		em.getTransaction().commit();
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/etusivuAdmin.jsp");
-		request.setAttribute("adminquestionlist", list);
-		try {
-			rd.forward(request, response);
-		} catch (ServletException | IOException e) {
-			e.printStackTrace();
-			System.out.println(e);
-		}
-	}
-	
-//	@POST
-//	@Path("/addquestion")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	public List<Kysymykset> addAdminQuestion(Kysymykset kysymykset) {
-//		EntityManager em=emf.createEntityManager();
-//		em.getTransaction().begin();
-//		em.persist(kysymykset);
-//		em.getTransaction().commit();
-//		List<Kysymykset> list=adminReadQuestion();		
-//		return list;
-//	}	
+		List<Kysymykset> list=readKysymys();		
+		return list;
+	}	
 	
 //	@POST
 //	@Path("/updatequestion")

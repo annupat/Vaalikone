@@ -97,6 +97,20 @@
 	    <version>2.5.0</version>
 	</dependency>
 	
+		<dependency>
+    <groupId>javax.persistence</groupId>
+    <artifactId>javax.persistence-api</artifactId>
+    <version>2.2</version>
+</dependency>
+
+<dependency>
+	<groupId>org.eclipse.persistence</groupId>
+	<artifactId>org.eclipse.persistence.jpa</artifactId>
+	<version>2.4.2</version>
+</dependency>
+
+   
+	
 	<!-- 
 	If using Java 11 or newer add next two.
 	These are moved to servlet api and not any more in Java SE API 
