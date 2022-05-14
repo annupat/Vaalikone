@@ -103,4 +103,49 @@ public class QuestionService {
 //		return list;
 //		
 //	}
+	
+	@DELETE
+	@Path("/deleteadminquestion/{kysymysId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<Kysymykset> deletekysymys(@PathParam("kysymysId") int kysymysId) {
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		Kysymykset k=em.find(Kysymykset.class, kysymysId);
+		if (k!=null) {
+			em.remove(k);//The actual delete line
+		}
+		em.getTransaction().commit();
+		//Calling the method readFish() of this service
+		List<Kysymykset> list=readKysymys();		
+		return list;
+	}	
+	@GET
+	@Path("/deleteadminquestion/{kysymysId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteKysymysByGet(@PathParam("kysymysId") int kysymysId, 
+			@Context HttpServletRequest request,
+			@Context HttpServletResponse response
+			) {
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		Kysymykset k=em.find(Kysymykset.class, kysymysId);
+		if (k!=null) {
+			em.remove(k);//The actual delete line
+		}
+		em.getTransaction().commit();
+		//Calling the method readFish() of this service
+		List<Kysymykset> list=readKysymys();		
+		
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/etusivuAdmin.jsp");
+		request.setAttribute("kysymykset", list);
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
 }
+

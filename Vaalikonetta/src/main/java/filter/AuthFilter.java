@@ -22,8 +22,8 @@ import org.apache.commons.codec.binary.Base64;
 								DispatcherType.FORWARD,
 								DispatcherType.INCLUDE,
 								DispatcherType.ERROR
-						})
-//						, urlPatterns = {"/rest/questionservice/readadminquestion"})
+						}
+						, urlPatterns = {"/rest/questionservice/readalladminquestions"})
 
 public class AuthFilter implements Filter {
 	Hashtable<String, String> ValidUsers = new Hashtable<>();
