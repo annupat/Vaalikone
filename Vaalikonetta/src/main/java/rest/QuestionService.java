@@ -90,19 +90,31 @@ public class QuestionService {
 		return list;
 	}	
 	
-//	@POST
-//	@Path("/updatequestion")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	public List<AdminQuestion> updateAdminQuestion(AdminQuestion kysymys) {
-//		EntityManager em=emf.createEntityManager();
-//		em.getTransaction().begin();
-//		em.persist(kysymys);
-//		em.getTransaction().commit();
-//		List<AdminQuestion> list=adminReadQuestion();
-//		return list;
-//		
-//	}
+	@PUT
+	@Path("/updatekysymys")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<Kysymykset> updateKysymys(Kysymykset kysymys) {
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(kysymys);
+		em.getTransaction().commit();
+		List<Kysymykset> list=adminReadQuestion();
+		return list;
+		
+	}
+	
+	@GET
+	@Path("/readtoupdatekysymys/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Kysymykset readToUpdateKysymys(@PathParam("kysymysId") int kysymysId) { 
+	EntityManager em=emf.createEntityManager();
+	em.getTransaction().begin();
+	Kysymykset k=em.find(Kysymykset.class, kysymysId); 
+	em.getTransaction().commit();
+	return k;
+	}
 	
 	@DELETE
 	@Path("/deleteadminquestion/{kysymysId}")

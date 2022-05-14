@@ -29,16 +29,13 @@ public class HandleKysymys extends HttpServlet {
 //	}
 
 	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	
-	
+
 	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getServletPath();
 		List<Kysymykset> list = null;
 		switch (action) {
@@ -46,12 +43,25 @@ public class HandleKysymys extends HttpServlet {
 			list = addkysymys(request);
 			break;
 		case "/readkysymys":
-			list=readKysymys(request);break;
-			
+			list = readKysymys(request);
+			break;
+
 		case "/deleteadminquestion":
-			String kysymysId=request.getParameter("kysymysId");
-			list=deleteadminquestion(request);break;
+			String kysymysId = request.getParameter("kysymysId");
+			list = deleteadminquestion(request);
+			break;
+		
+		  case "/updatekysymys":
+			  list=updatekysymys(request);break;
+			  
+		case "/readtoupdatekysymys":
+			Kysymykset k = readtoupdatekysymys(request);
+			request.setAttribute("kysymyset", k);
+			RequestDispatcher rd = request.getRequestDispatcher("./jsp/updatekysymys.jsp");
+			rd.forward(request, response);
+			return;
 		}
+		
 		request.setAttribute("kysymyslist", list);
 		RequestDispatcher rd = request.getRequestDispatcher("./jsp/kysymysform.jsp");
 		rd.forward(request, response);
@@ -64,7 +74,7 @@ public class HandleKysymys extends HttpServlet {
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(uri);
 		Builder b = wt.request();
-	    b.header("Authorization", request.getHeader("Authorization"));
+		b.header("Authorization", request.getHeader("Authorization"));
 		Entity<Kysymykset> e = Entity.entity(k, MediaType.APPLICATION_JSON);
 		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {
 		};
@@ -74,32 +84,66 @@ public class HandleKysymys extends HttpServlet {
 	}
 
 	private List<Kysymykset> readKysymys(HttpServletRequest request) {
-		String kysymysId=request.getParameter("kysymysId");
+		String kysymysId = request.getParameter("kysymysId");
 		String uri = "http://127.0.0.1:8080/rest/questionservice/readkysymys";
-		Client c=ClientBuilder.newClient();
-		WebTarget wt=c.target(uri);
-		Builder b=wt.request();
-	    b.header("Authorization", request.getHeader("Authorization"));
-	
-		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {};
-		
-		List<Kysymykset> returnedList=b.get(genericList);
+		Client c = ClientBuilder.newClient();
+		WebTarget wt = c.target(uri);
+		Builder b = wt.request();
+		b.header("Authorization", request.getHeader("Authorization"));
+
+		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {
+		};
+
+		List<Kysymykset> returnedList = b.get(genericList);
 		return returnedList;
 	}
-	
+
 	private List<Kysymykset> deleteadminquestion(HttpServletRequest request) {
+		String kysymysId = request.getParameter("kysymysId");
+		String uri = "http://127.0.0.1:8080/rest/questionservice/deleteadminquestion/" + kysymysId;
+		Client c = ClientBuilder.newClient();
+		WebTarget wt = c.target(uri);
+		Builder b = wt.request();
+		b.header("Authorization", request.getHeader("Authorization"));
+		// Create a GenericType to be able to get List of objects
+		// This will be the second parameter of post method
+		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {
+		};
+
+		// Posting data (Entity<ArrayList<DogBreed>> e) to the given address
+		List<Kysymykset> returnedList = b.delete(genericList);
+		return returnedList;
+	}
+
+	private List<Kysymykset> updatekysymys(HttpServletRequest request) {
+		// A Fish object to send to our web-service
+		Kysymykset k = new Kysymykset(request.getParameter("kysymysId"), request.getParameter("kysymys"));
+		System.out.println(k);
+		String uri = "http://127.0.0.1:8080/rest/questionservice/updatekysymys";
+		Client c = ClientBuilder.newClient();
+		WebTarget wt = c.target(uri);
+		Builder b = wt.request();
+		// Here we create an Entity of a Fish object as JSON string format
+		Entity<Kysymykset> e = Entity.entity(k, MediaType.APPLICATION_JSON);
+		// Create a GenericType to be able to get List of objects
+		// This will be the second parameter of post method
+		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {
+		};
+
+		// Posting data (Entity<ArrayList<DogBreed>> e) to the given address
+		List<Kysymykset> returnedList = b.put(e, genericList);
+		return returnedList;
+	}
+	private Kysymykset readtoupdatekysymys(HttpServletRequest request) {
 		String kysymysId=request.getParameter("kysymysId");
-		String uri = "http://127.0.0.1:8080/rest/questionservice/deleteadminquestion/"+kysymysId;
+		String uri = "http://127.0.0.1:8080/rest/questionservice/readtoupdatekysymys/"+kysymysId;
 		Client c=ClientBuilder.newClient();
 		WebTarget wt=c.target(uri);
 		Builder b=wt.request();
-	    b.header("Authorization", request.getHeader("Authorization"));
-		//Create a GenericType to be able to get List of objects
-		//This will be the second parameter of post method
-		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {};
-		
-		//Posting data (Entity<ArrayList<DogBreed>> e) to the given address
-		List<Kysymykset> returnedList=b.delete(genericList);
-		return returnedList;
-	}
+		Kysymykset kysymykset=b.get(Kysymykset.class);
+		return kysymykset;
+
+		 
+		}
+	
 }
