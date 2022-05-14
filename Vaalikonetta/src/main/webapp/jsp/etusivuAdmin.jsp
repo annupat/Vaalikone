@@ -27,18 +27,20 @@
 
 
     <c:forEach var = "kysymykset" items = "<%=readAllAdminQuestions() %>">
-         <li>${kysymykset} 
+         <li>${kysymykset.kysymys} 
      </c:forEach>
     </ol>
     
-    <form action='rest/questionservice/deleteadminquestion'>
-        <input class="button1" type="button" value = "Poista kysymys"></form>
+    <form action='rest/questionservice/deleteadminquestion' method='post'>
+        <input type = 'text' name = 'kysymysId' value = ''>
+        <input class="button1" type="submit" value = "Poista kysymys"></form>
         
     <form action='rest/questionservice/updateadminquestion'>
         <input class="button2" type="button" value = "Päivitä kysymystä"></form>
         
     <form action='rest/questionservice/addadminquestion'>
         <input class="button3" type="button" value = "Lisää kysymys"></form>
+    
     
 </body>
 <style>

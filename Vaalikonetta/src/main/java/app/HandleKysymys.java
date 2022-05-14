@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 
 import data.Kysymykset;
 
-@WebServlet(urlPatterns = { "/addkysymys" })
+@WebServlet(urlPatterns = { "/addkysymys", "/deletedminquestion" })
 public class HandleKysymys extends HttpServlet {
 //	private static final long serialVersionUID = 1L;
 
@@ -47,6 +47,10 @@ public class HandleKysymys extends HttpServlet {
 			break;
 		case "/readkysymys":
 			list=readKysymys(request);break;
+			
+		case "/deleteadminquestion":
+			String kysymysId=request.getParameter("kysymysId");
+			list=deleteadminquestion(request);break;
 		}
 		request.setAttribute("kysymyslist", list);
 		RequestDispatcher rd = request.getRequestDispatcher("./jsp/kysymysform.jsp");
@@ -60,6 +64,7 @@ public class HandleKysymys extends HttpServlet {
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(uri);
 		Builder b = wt.request();
+	    b.header("Authorization", request.getHeader("Authorization"));
 		Entity<Kysymykset> e = Entity.entity(k, MediaType.APPLICATION_JSON);
 		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {
 		};
@@ -74,6 +79,7 @@ public class HandleKysymys extends HttpServlet {
 		Client c=ClientBuilder.newClient();
 		WebTarget wt=c.target(uri);
 		Builder b=wt.request();
+	    b.header("Authorization", request.getHeader("Authorization"));
 	
 		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {};
 		
@@ -81,5 +87,19 @@ public class HandleKysymys extends HttpServlet {
 		return returnedList;
 	}
 	
-
+	private List<Kysymykset> deleteadminquestion(HttpServletRequest request) {
+		String kysymysId=request.getParameter("kysymysId");
+		String uri = "http://127.0.0.1:8080/rest/questionservice/deleteadminquestion/"+kysymysId;
+		Client c=ClientBuilder.newClient();
+		WebTarget wt=c.target(uri);
+		Builder b=wt.request();
+	    b.header("Authorization", request.getHeader("Authorization"));
+		//Create a GenericType to be able to get List of objects
+		//This will be the second parameter of post method
+		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {};
+		
+		//Posting data (Entity<ArrayList<DogBreed>> e) to the given address
+		List<Kysymykset> returnedList=b.delete(genericList);
+		return returnedList;
+	}
 }
