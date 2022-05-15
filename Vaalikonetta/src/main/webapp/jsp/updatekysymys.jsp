@@ -9,7 +9,7 @@
 <body>
 
 
-<form action='../updatekysymys' method='post'>
+<form action='jsp/updatekysymys.jsp' method='post'>
 <input type='text' name='id' value='${requestScope.kysymykset.kysymysId }'>
 <input type='text' name='kysymys' value='${requestScope.kysymykset.kysymys }'>
 <input type='submit' name='ok' value='OK'>

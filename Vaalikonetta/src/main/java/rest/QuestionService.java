@@ -38,7 +38,7 @@ public class QuestionService {
 	public List<Kysymykset> readKysymys() {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		List<Kysymykset> list=em.createQuery("select k from Kysymys k").getResultList();		
+		List<Kysymykset> list=em.createQuery("select k from Kysymykset k").getResultList();		
 		em.getTransaction().commit();
 		return list;
 	}	
@@ -116,22 +116,22 @@ public class QuestionService {
 	return k;
 	}
 	
-	@DELETE
-	@Path("/deleteadminquestion/{kysymysId}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Kysymykset> deletekysymys(@PathParam("kysymysId") int kysymysId) {
-		EntityManager em=emf.createEntityManager();
-		em.getTransaction().begin();
-		Kysymykset k=em.find(Kysymykset.class, kysymysId);
-		if (k!=null) {
-			em.remove(k);//The actual delete line
-		}
-		em.getTransaction().commit();
-		//Calling the method readFish() of this service
-		List<Kysymykset> list=readKysymys();		
-		return list;
-	}	
+//	@DELETE
+//	@Path("/deleteadminquestion/{kysymysId}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	public List<Kysymykset> deletekysymys(@PathParam("kysymysId") int kysymysId) {
+//		EntityManager em=emf.createEntityManager();
+//		em.getTransaction().begin();
+//		Kysymykset k=em.find(Kysymykset.class, kysymysId);
+//		if (k!=null) {
+//			em.remove(k);//The actual delete line
+//		}
+//		em.getTransaction().commit();
+//		//Calling the method readFish() of this service
+//		List<Kysymykset> list=readKysymys();		
+//		return list;
+//	}	
 	@GET
 	@Path("/deleteadminquestion/{kysymysId}")
 	@Produces(MediaType.APPLICATION_JSON)

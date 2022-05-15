@@ -28,6 +28,10 @@ public class HandleKysymys extends HttpServlet {
 //		// TODO Auto-generated constructor stub
 //	}
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -120,15 +124,14 @@ public class HandleKysymys extends HttpServlet {
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(uri);
 		Builder b = wt.request();
-		// Here we create an Entity of a Fish object as JSON string format
+		// alla olevan rivin lisäsin, muuta en muuttanut
+		b.header("Authorization", request.getHeader("Authorization"));
+		
 		Entity<Kysymykset> e = Entity.entity(k, MediaType.APPLICATION_JSON);
-		// Create a GenericType to be able to get List of objects
-		// This will be the second parameter of post method
 		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {
 		};
-
 		// Posting data (Entity<ArrayList<DogBreed>> e) to the given address
-		List<Kysymykset> returnedList = b.put(e, genericList);
+		List<Kysymykset> returnedList = b.post(e, genericList);
 		return returnedList;
 	}
 	private Kysymykset readtoupdatekysymys(HttpServletRequest request) {
