@@ -105,7 +105,7 @@ public class QuestionService {
 	}
 	
 	@GET
-	@Path("/readtoupdatekysymys/{id}")
+	@Path("/readtoupdatekysymys/{kysymysId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Kysymykset readToUpdateKysymys(@PathParam("kysymysId") int kysymysId) { 

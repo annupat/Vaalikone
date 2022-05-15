@@ -26,7 +26,7 @@
 <h3>Kysymykset:</h3>
 <c:forEach var="kysymys" items="<%=readAllAdminQuestions() %>">
 	<li>${kysymys} <a href='/rest/questionservice/deleteadminquestion/${kysymys.kysymysId}'>Delete</a> 
-<%-- 	<a href='../readtoupdatekysymys?id=${kysymys.kysymysId}'>Update</a> --%>
+ 	<a href='../readtoupdatekysymys?id=${kysymys.kysymysId}'>Update</a> 
 </c:forEach>
 
 <h3>Uusien kysymysten lisääminen</h3>
@@ -42,7 +42,7 @@
 <!-- 	</form> -->
 
 <h3>Kysymysten päivittäminen</h3>
-	<form action='/jsp/updatekysymys.jsp' method='post'>
+	<form action='/rest/questionservice/readtoupdatekysymys' method='post'>
 <input type='text' name='kysymysId' value='${requestScope.Kysymykset.kysymysId}' placeholder='syötä kysymysnumero'>
 <input type='text' name='kysymys' value='${requestScope.Kysymykset.kysymys}' placeholder='syötä uusi kysymys'>
 <input type='submit' name='ok' value='Päivitä kysymys'>

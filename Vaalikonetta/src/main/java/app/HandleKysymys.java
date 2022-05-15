@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 
 import data.Kysymykset;
 
-@WebServlet(urlPatterns = { "/addkysymys", "/deletedminquestion" })
+@WebServlet(urlPatterns = { "/addkysymys", "/deletedminquestion" ,"/updatekysymys", "/readtoupdatekysymys"})
 public class HandleKysymys extends HttpServlet {
 //	private static final long serialVersionUID = 1L;
 
@@ -60,8 +60,8 @@ public class HandleKysymys extends HttpServlet {
 			  
 		case "/readtoupdatekysymys":
 			Kysymykset k = readtoupdatekysymys(request);
-			request.setAttribute("kysymyset", k);
-			RequestDispatcher rd = request.getRequestDispatcher("./jsp/updatekysymys.jsp");
+			request.setAttribute("kysymykset", k);
+			RequestDispatcher rd = request.getRequestDispatcher("./jsp/kysymysform.jsp");
 			rd.forward(request, response);
 			return;
 		}
