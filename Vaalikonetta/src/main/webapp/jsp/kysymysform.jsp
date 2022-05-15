@@ -19,14 +19,10 @@
 <body>
 <h2> Kysymysten ylläpito</h2>
 
-<%--     <c:forEach var = "kysymykset" items = "<%=readAllAdminQuestions() %>"> --%>
-<%--          <li>${kysymykset}  --%>
-<%--      </c:forEach> --%>
-<%-- alla olevalla lukee kysymykset with linkeillä heti etusivulle --%>
 <h3>Kysymykset:</h3>
 <c:forEach var="kysymys" items="<%=readAllAdminQuestions() %>">
 	<li>${kysymys} <a href='/rest/questionservice/deleteadminquestion/${kysymys.kysymysId}'>Delete</a> 
- 	<a href='../readtoupdatekysymys?id=${kysymys.kysymysId}'>Update</a> 
+ 	<a href='/rest/questionservice/readtoupdatekysymys/${kysymys.kysymysId}'>Update</a> 
 </c:forEach>
 
 <h3>Uusien kysymysten lisääminen</h3>
@@ -35,20 +31,7 @@
 <input type='submit' name='ok' value='Lisää uusi kysymys'>
 </form>
 
-<%-- 	<form action='../questionservice/deleteadminquestion/${kysymysId}' --%>
-<!-- 		method='post'> -->
-<!-- 		<input type='text' name='kysymysId' value=''> <input -->
-<!-- 			 type="submit" name='delete' value="Poista kysymys"> -->
-<!-- 	</form> -->
-
-<h3>Kysymysten päivittäminen</h3>
-	<form action='/rest/questionservice/readtoupdatekysymys' method='post'>
-<input type='text' name='kysymysId' value='${requestScope.Kysymykset.kysymysId}' placeholder='syötä kysymysnumero'>
-<input type='text' name='kysymys' value='${requestScope.Kysymykset.kysymys}' placeholder='syötä uusi kysymys'>
-<input type='submit' name='ok' value='Päivitä kysymys'>
-</form>
-
-
+<br><a href='http://127.0.0.1:8080/index.html'>Takaisin etusivulle</a>
 </body>
 </html>
 <%!

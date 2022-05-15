@@ -56,7 +56,11 @@ public class HandleKysymys extends HttpServlet {
 			break;
 		
 		  case "/updatekysymys":
-			  list=updatekysymys(request);break;
+			  list=updatekysymys(request);
+			  request.setAttribute("kysymykset", list);
+			  RequestDispatcher rd1 = request.getRequestDispatcher("./jsp/kysymysform.jsp");
+			  rd1.forward(request, response);
+			  return;
 			  
 		case "/readtoupdatekysymys":
 			Kysymykset k = readtoupdatekysymys(request);
@@ -73,7 +77,6 @@ public class HandleKysymys extends HttpServlet {
 
 	private List<Kysymykset> addkysymys(HttpServletRequest request) {
 		Kysymykset k = new Kysymykset(request.getParameter("kysymys"));
-		System.out.println(k);
 		String uri = "http://127.0.0.1:8080/rest/questionservice/addkysymys";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(uri);
@@ -119,19 +122,18 @@ public class HandleKysymys extends HttpServlet {
 	private List<Kysymykset> updatekysymys(HttpServletRequest request) {
 		// A Fish object to send to our web-service
 		Kysymykset k = new Kysymykset(request.getParameter("kysymysId"), request.getParameter("kysymys"));
-		System.out.println(k);
 		String uri = "http://127.0.0.1:8080/rest/questionservice/updatekysymys";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(uri);
 		Builder b = wt.request();
 		// alla olevan rivin lisäsin, muuta en muuttanut
-		b.header("Authorization", request.getHeader("Authorization"));
+	//	b.header("Authorization", request.getHeader("Authorization"));
 		
 		Entity<Kysymykset> e = Entity.entity(k, MediaType.APPLICATION_JSON);
 		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {
 		};
 		// Posting data (Entity<ArrayList<DogBreed>> e) to the given address
-		List<Kysymykset> returnedList = b.post(e, genericList);
+		List<Kysymykset> returnedList = b.put(e, genericList);
 		return returnedList;
 	}
 	private Kysymykset readtoupdatekysymys(HttpServletRequest request) {

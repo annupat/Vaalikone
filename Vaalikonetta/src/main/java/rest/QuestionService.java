@@ -94,13 +94,27 @@ public class QuestionService {
 	@Path("/updatekysymys")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Kysymykset> updateKysymys(Kysymykset kysymys) {
+	public void updateKysymys(Kysymykset kysymykset, 
+		@Context HttpServletRequest request,
+		@Context HttpServletResponse response
+			) {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		em.persist(kysymys);
+		Kysymykset k=em.find(Kysymykset.class, kysymykset.getKysymysId());
+		if (k!=null) {
+			em.merge(k);//The actual update line
+		}
 		em.getTransaction().commit();
-		List<Kysymykset> list=adminReadQuestion();
-		return list;
+		List<Kysymykset> list=readKysymys();
+		
+		RequestDispatcher rd1=request.getRequestDispatcher("/jsp/kysymysform.jsp");
+		request.setAttribute("kysymykset", list);
+		try {
+			rd1.forward(request, response);
+		} catch (ServletException | IOException e) {
+			
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -108,30 +122,27 @@ public class QuestionService {
 	@Path("/readtoupdatekysymys/{kysymysId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Kysymykset readToUpdateKysymys(@PathParam("kysymysId") int kysymysId) { 
-	EntityManager em=emf.createEntityManager();
-	em.getTransaction().begin();
-	Kysymykset k=em.find(Kysymykset.class, kysymysId); 
-	em.getTransaction().commit();
-	return k;
+	public void updateKysymysByGet(@PathParam("kysymysId") int kysymysId, 
+			@Context HttpServletRequest request,
+			@Context HttpServletResponse response
+			) {
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		Kysymykset k=em.find(Kysymykset.class, kysymysId);
+
+		em.getTransaction().commit();
+		
+		
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/updatekysymys.jsp");
+		request.setAttribute("kysymykset", k);
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			
+			e.printStackTrace();
+		}
 	}
 	
-//	@DELETE
-//	@Path("/deleteadminquestion/{kysymysId}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	public List<Kysymykset> deletekysymys(@PathParam("kysymysId") int kysymysId) {
-//		EntityManager em=emf.createEntityManager();
-//		em.getTransaction().begin();
-//		Kysymykset k=em.find(Kysymykset.class, kysymysId);
-//		if (k!=null) {
-//			em.remove(k);//The actual delete line
-//		}
-//		em.getTransaction().commit();
-//		//Calling the method readFish() of this service
-//		List<Kysymykset> list=readKysymys();		
-//		return list;
-//	}	
 	@GET
 	@Path("/deleteadminquestion/{kysymysId}")
 	@Produces(MediaType.APPLICATION_JSON)

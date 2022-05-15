@@ -20,6 +20,10 @@
 		  <param-name>jersey.config.server.provider.packages</param-name>
 		  <param-value>rest</param-value>
 		</init-param>
+		<init-param>
+		<param-name>maxFormContentSize</param-name>
+		<param-value>10000000</param-value>
+		</init-param>
 		<!--
 			This tells the server to load REST service when the server starts
 		-->
