@@ -32,11 +32,11 @@
      </c:forEach>
     </ol>
     
-    <form action='rest/questionservice/deleteadminquestion' method='post'>
+    <form action='../questionservice/deleteadminquestion' method='post'>
         <input type = 'text' name = 'kysymysId' value = ''>
         <input class="button1" type="submit" value = "Poista kysymys"></form>
         
-    <form action='rest/questionservice/updateadminquestion'>
+    <form action='../questionservice/readtoupdatekysymys' method='post'>
         <input class="button2" type="button" value = "Päivitä kysymystä"></form>
         
     <form action='rest/questionservice/addadminquestion'>

@@ -14,31 +14,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Admin näkymä kysymyksille</title>
 </head>
 <body>
+<h2> Kysymysten ylläpito</h2>
 
-    <c:forEach var = "kysymykset" items = "<%=readAllAdminQuestions() %>">
-         <li>${kysymykset} 
-     </c:forEach>
-
-<c:forEach var="kysymys" items="${requestScope.kysymyslist }">
-	<li>${kysymys} <a href='rest/questionservice/deleteadminquestion/${kysymykset.kysymysId}'>Delete</a> <a href='../readtoupdatekysymys?id=${kysymykset.kysymysId}'>Update</a>
+<%--     <c:forEach var = "kysymykset" items = "<%=readAllAdminQuestions() %>"> --%>
+<%--          <li>${kysymykset}  --%>
+<%--      </c:forEach> --%>
+<%-- alla olevalla lukee kysymykset with linkeillä heti etusivulle --%>
+<h3>Kysymykset:</h3>
+<c:forEach var="kysymys" items="<%=readAllAdminQuestions() %>">
+	<li>${kysymys} <a href='/rest/questionservice/deleteadminquestion/${kysymys.kysymysId}'>Delete</a> 
+ 	<a href='../readtoupdatekysymys?id=${kysymys.kysymysId}'>Update</a> 
 </c:forEach>
 
-
-<form action='../addkysymys' method='post'>
+<h3>Uusien kysymysten lisääminen</h3>
+<form action='/addkysymys' method='post'>
 <input type='text' name='kysymys' value=''>
-<input type='submit' name='ok' value='OK'>
+<input type='submit' name='ok' value='Lisää uusi kysymys'>
 </form>
 
-    <form action='rest/questionservice/deleteadminquestion/${kysymysId}' method='post'>
-        <input type = 'text' name = 'kysymysId' value = ''>
-        <input class="button1" type="submit" value = "Poista kysymys"></form>
-        
-<form action='../updatekysymys' method='post'>
-<input type='text' name='kysymysId' value='' placeholder=kysymysnumero>
-<input type='text' name='kysymys' value='' placeholder=kysymys>
+<%-- 	<form action='../questionservice/deleteadminquestion/${kysymysId}' --%>
+<!-- 		method='post'> -->
+<!-- 		<input type='text' name='kysymysId' value=''> <input -->
+<!-- 			 type="submit" name='delete' value="Poista kysymys"> -->
+<!-- 	</form> -->
+
+<h3>Kysymysten päivittäminen</h3>
+	<form action='/rest/questionservice/readtoupdatekysymys' method='post'>
+<input type='text' name='kysymysId' value='${requestScope.Kysymykset.kysymysId}' placeholder='syötä kysymysnumero'>
+<input type='text' name='kysymys' value='${requestScope.Kysymykset.kysymys}' placeholder='syötä uusi kysymys'>
 <input type='submit' name='ok' value='Päivitä kysymys'>
 </form>
 

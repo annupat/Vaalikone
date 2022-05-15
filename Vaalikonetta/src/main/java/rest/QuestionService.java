@@ -38,7 +38,7 @@ public class QuestionService {
 	public List<Kysymykset> readKysymys() {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		List<Kysymykset> list=em.createQuery("select k from Kysymys k").getResultList();		
+		List<Kysymykset> list=em.createQuery("select k from Kysymykset k").getResultList();		
 		em.getTransaction().commit();
 		return list;
 	}	
@@ -67,7 +67,7 @@ public class QuestionService {
 	        em.getTransaction().begin();
 	        List<Kysymykset> list=em.createQuery("SELECT k FROM Kysymykset k").getResultList();       
 	        em.getTransaction().commit();
-	        RequestDispatcher rd = request.getRequestDispatcher("/jsp/etusivuAdmin.jsp");
+	        RequestDispatcher rd = request.getRequestDispatcher("/jsp/kysymysform.jsp");
 	        request.setAttribute("adminquestionlist", list);
 	        try {
 	            rd.forward(request, response);
@@ -105,7 +105,7 @@ public class QuestionService {
 	}
 	
 	@GET
-	@Path("/readtoupdatekysymys/{id}")
+	@Path("/readtoupdatekysymys/{kysymysId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Kysymykset readToUpdateKysymys(@PathParam("kysymysId") int kysymysId) { 
@@ -116,22 +116,22 @@ public class QuestionService {
 	return k;
 	}
 	
-	@DELETE
-	@Path("/deleteadminquestion/{kysymysId}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Kysymykset> deletekysymys(@PathParam("kysymysId") int kysymysId) {
-		EntityManager em=emf.createEntityManager();
-		em.getTransaction().begin();
-		Kysymykset k=em.find(Kysymykset.class, kysymysId);
-		if (k!=null) {
-			em.remove(k);//The actual delete line
-		}
-		em.getTransaction().commit();
-		//Calling the method readFish() of this service
-		List<Kysymykset> list=readKysymys();		
-		return list;
-	}	
+//	@DELETE
+//	@Path("/deleteadminquestion/{kysymysId}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	public List<Kysymykset> deletekysymys(@PathParam("kysymysId") int kysymysId) {
+//		EntityManager em=emf.createEntityManager();
+//		em.getTransaction().begin();
+//		Kysymykset k=em.find(Kysymykset.class, kysymysId);
+//		if (k!=null) {
+//			em.remove(k);//The actual delete line
+//		}
+//		em.getTransaction().commit();
+//		//Calling the method readFish() of this service
+//		List<Kysymykset> list=readKysymys();		
+//		return list;
+//	}	
 	@GET
 	@Path("/deleteadminquestion/{kysymysId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -150,7 +150,7 @@ public class QuestionService {
 		//Calling the method readFish() of this service
 		List<Kysymykset> list=readKysymys();		
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/etusivuAdmin.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/kysymysform.jsp");
 		request.setAttribute("kysymykset", list);
 		try {
 			rd.forward(request, response);
