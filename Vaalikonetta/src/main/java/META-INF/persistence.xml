@@ -9,9 +9,6 @@
 	<class>data.Kysymykset</class>
 	<class>data.Vastaukset</class>
 	<class>data.VastauksetPK</class>
-
-	
-	
 	
 		
 <!--  jdbcDriver == class, where in the implementation of database functions--> 
