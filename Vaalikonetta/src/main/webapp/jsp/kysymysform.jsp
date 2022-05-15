@@ -23,20 +23,23 @@
      </c:forEach>
 
 <c:forEach var="kysymys" items="${requestScope.kysymyslist }">
-	<li>${kysymys} <a href='rest/questionservice/deleteadminquestion/${kysymykset.kysymysId}'>Delete</a> <a href='../readtoupdatekysymys?id=${kysymykset.kysymysId}'>Update</a>
+	<li>${kysymys} <a href='rest/questionservice/deleteadminquestion/${kysymys.kysymysId}'>Delete</a> <a href='../readtoupdatekysymys?id=${kysymys.kysymysId}'>Update</a>
 </c:forEach>
 
 
-<form action='../addkysymys' method='post'>
+<form action='/addkysymys' method='post'>
 <input type='text' name='kysymys' value=''>
-<input type='submit' name='ok' value='OK'>
+<input type='submit' name='ok' value='Lisää uusi kysymys'>
 </form>
 
-    <form action='rest/questionservice/deleteadminquestion/${kysymysId}' method='post'>
-        <input type = 'text' name = 'kysymysId' value = ''>
-        <input class="button1" type="submit" value = "Poista kysymys"></form>
-        
-<form action='../updatekysymys' method='post'>
+<%-- 	<form action='../questionservice/deleteadminquestion/${kysymysId}' --%>
+<!-- 		method='post'> -->
+<!-- 		<input type='text' name='kysymysId' value=''> <input -->
+<!-- 			 type="submit" name='delete' value="Poista kysymys"> -->
+<!-- 	</form> -->
+
+
+	<form action='../updatekysymys' method='post'>
 <input type='text' name='kysymysId' value='' placeholder=kysymysnumero>
 <input type='text' name='kysymys' value='' placeholder=kysymys>
 <input type='submit' name='ok' value='Päivitä kysymys'>

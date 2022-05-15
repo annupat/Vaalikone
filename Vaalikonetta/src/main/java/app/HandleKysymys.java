@@ -100,17 +100,14 @@ public class HandleKysymys extends HttpServlet {
 
 	private List<Kysymykset> deleteadminquestion(HttpServletRequest request) {
 		String kysymysId = request.getParameter("kysymysId");
-		String uri = "http://127.0.0.1:8080/rest/questionservice/deleteadminquestion/" + kysymysId;
+		String uri = "http://127.0.0.1:8080/rest/questionservice/deleteadminquestion/"+kysymysId;
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(uri);
 		Builder b = wt.request();
 		b.header("Authorization", request.getHeader("Authorization"));
-		// Create a GenericType to be able to get List of objects
-		// This will be the second parameter of post method
 		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {
 		};
 
-		// Posting data (Entity<ArrayList<DogBreed>> e) to the given address
 		List<Kysymykset> returnedList = b.delete(genericList);
 		return returnedList;
 	}

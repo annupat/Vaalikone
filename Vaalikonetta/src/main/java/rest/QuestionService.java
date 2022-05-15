@@ -67,7 +67,7 @@ public class QuestionService {
 	        em.getTransaction().begin();
 	        List<Kysymykset> list=em.createQuery("SELECT k FROM Kysymykset k").getResultList();       
 	        em.getTransaction().commit();
-	        RequestDispatcher rd = request.getRequestDispatcher("/jsp/etusivuAdmin.jsp");
+	        RequestDispatcher rd = request.getRequestDispatcher("/jsp/kysymysform.jsp");
 	        request.setAttribute("adminquestionlist", list);
 	        try {
 	            rd.forward(request, response);
@@ -150,7 +150,7 @@ public class QuestionService {
 		//Calling the method readFish() of this service
 		List<Kysymykset> list=readKysymys();		
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/etusivuAdmin.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/kysymysform.jsp");
 		request.setAttribute("kysymykset", list);
 		try {
 			rd.forward(request, response);
