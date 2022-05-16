@@ -3,7 +3,6 @@ package rest;
 import java.io.IOException;
 import java.util.List;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -22,146 +21,150 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-//import data.AdminQuestion;
 import data.Kysymykset;
 
+/**
+ * @author Mona J‰‰skel‰inen, Annukka Patrikainen, Timo-Jaakko WidgrÈn
+ */
 
-@Path ("/questionservice")
+@Path("/questionservice")
 public class QuestionService {
-	
-	EntityManagerFactory emf=Persistence.createEntityManagerFactory("vaalikonetta");
 
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("vaalikonetta");
+
+	/**
+	 * Lukee yhden kysymyksen tietokannasta
+	 */
 	@GET
-	@Path("/readkysymys")
+	@Path("/readadminquestion")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Kysymykset> readKysymys() {
-		EntityManager em=emf.createEntityManager();
+	public List<Kysymykset> adminReadQuestion() {
+		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		List<Kysymykset> list=em.createQuery("select k from Kysymykset k").getResultList();		
+		List<Kysymykset> list = em.createQuery("SELECT k FROM Kysymykset k").getResultList();
 		em.getTransaction().commit();
+		System.out.println(list);
 		return list;
-	}	
-	
-	
-	 @GET
-	    @Path("/readadminquestion")
-	    @Produces(MediaType.APPLICATION_JSON)
-	    @Consumes(MediaType.APPLICATION_JSON)
-	    public List<Kysymykset> adminReadQuestion() {
-	        EntityManager em=emf.createEntityManager();
-	        em.getTransaction().begin();
-	        List<Kysymykset> list=em.createQuery("SELECT k FROM Kysymykset k").getResultList();       
-	        em.getTransaction().commit();
-	        System.out.println(list);
-	        return list;
-	       
-	    }   
-	   
-	    @GET
-	    @Path("/readalladminquestions")
-	    @Produces(MediaType.APPLICATION_JSON)
-	    @Consumes(MediaType.APPLICATION_JSON)
-	    public void readAllAdminQuestions(@Context HttpServletRequest request, @Context HttpServletResponse response) {
-	        EntityManager em=emf.createEntityManager();
-	        em.getTransaction().begin();
-	        List<Kysymykset> list=em.createQuery("SELECT k FROM Kysymykset k").getResultList();       
-	        em.getTransaction().commit();
-	        RequestDispatcher rd = request.getRequestDispatcher("/jsp/kysymysform.jsp");
-	        request.setAttribute("adminquestionlist", list);
-	        try {
-	            rd.forward(request, response);
-	        } catch (ServletException | IOException e) {
-	            e.printStackTrace();
-	            System.out.println(e);
-	        }
-	    }
-	
+
+	}
+
+	/**
+	 * Lukee kaikki kysymykset ja ohjaa kysymysform.jsp
+	 */
+	@GET
+	@Path("/readalladminquestions")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void readAllAdminQuestions(@Context HttpServletRequest request, @Context HttpServletResponse response) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		List<Kysymykset> list = em.createQuery("SELECT k FROM Kysymykset k").getResultList();
+		em.getTransaction().commit();
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/kysymysform.jsp");
+		request.setAttribute("adminquestionlist", list);
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+	}
+
+	/**
+	 * Lis‰‰ kysymyksen
+	 */
 	@POST
 	@Path("/addkysymys")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public List<Kysymykset> addKysymys(Kysymykset kysymykset) {
-		EntityManager em=emf.createEntityManager();
+		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(kysymykset);
 		em.getTransaction().commit();
-		List<Kysymykset> list=adminReadQuestion();		
+		List<Kysymykset> list = adminReadQuestion();
 		return list;
-	}	
-	
+	}
+
+	/**
+	 * @param kysymys
+	 * @param request
+	 * @param response T‰m‰n pit‰isi p‰ivitt‰‰ kysymys ja ohjata
+	 *                 kysymysform.jsp:lle, mutta ei toimi.
+	 */
 	@PUT
 	@Path("/updatekysymys")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateKysymys(Kysymykset kysymykset, 
-		@Context HttpServletRequest request,
-		@Context HttpServletResponse response
-			) {
-		EntityManager em=emf.createEntityManager();
+	public void updateKysymys(Kysymykset kysymys, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		Kysymykset k=em.find(Kysymykset.class, kysymykset.getKysymysId());
-		if (k!=null) {
-			em.merge(k);//The actual update line
+		Kysymykset k = em.find(Kysymykset.class, kysymys.getKysymysId());
+		if (k != null) {
+			em.merge(kysymys);
 		}
 		em.getTransaction().commit();
-		List<Kysymykset> list=readKysymys();
-		
-		RequestDispatcher rd1=request.getRequestDispatcher("/jsp/kysymysform.jsp");
+		List<Kysymykset> list = adminReadQuestion();
+
+		RequestDispatcher rd1 = request.getRequestDispatcher("/jsp/kysymysform.jsp");
 		request.setAttribute("kysymykset", list);
+		System.out.println("SERVICE: " + list);
 		try {
 			rd1.forward(request, response);
 		} catch (ServletException | IOException e) {
-			
+
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
+	/**
+	 * P‰ivitt‰‰ kysymyksen ja ottaa talteen Id:n
+	 */
 	@GET
 	@Path("/readtoupdatekysymys/{kysymysId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateKysymysByGet(@PathParam("kysymysId") int kysymysId, 
-			@Context HttpServletRequest request,
-			@Context HttpServletResponse response
-			) {
-		EntityManager em=emf.createEntityManager();
+	public void updateKysymysByGet(@PathParam("kysymysId") int kysymysId, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		Kysymykset k=em.find(Kysymykset.class, kysymysId);
+		Kysymykset k = em.find(Kysymykset.class, kysymysId);
 
 		em.getTransaction().commit();
-		
-		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/updatekysymys.jsp");
+
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/updatekysymys.jsp");
 		request.setAttribute("kysymykset", k);
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {
-			
+
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Poistaa kysymyksen k‰ytt‰m‰ll‰ Id:t‰
+	 */
 	@GET
 	@Path("/deleteadminquestion/{kysymysId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void deleteKysymysByGet(@PathParam("kysymysId") int kysymysId, 
-			@Context HttpServletRequest request,
-			@Context HttpServletResponse response
-			) {
-		EntityManager em=emf.createEntityManager();
+	public void deleteKysymysByGet(@PathParam("kysymysId") int kysymysId, @Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		Kysymykset k=em.find(Kysymykset.class, kysymysId);
-		if (k!=null) {
-			em.remove(k);//The actual delete line
+		Kysymykset k = em.find(Kysymykset.class, kysymysId);
+		if (k != null) {
+			em.remove(k);
 		}
 		em.getTransaction().commit();
-		//Calling the method readFish() of this service
-		List<Kysymykset> list=readKysymys();		
-		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/kysymysform.jsp");
+
+		List<Kysymykset> list = adminReadQuestion();
+
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/kysymysform.jsp");
 		request.setAttribute("kysymykset", list);
 		try {
 			rd.forward(request, response);
@@ -169,6 +172,5 @@ public class QuestionService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}	
+	}
 }
-

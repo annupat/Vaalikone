@@ -19,7 +19,8 @@ import javax.ws.rs.core.MediaType;
 
 import data.Kysymykset;
 
-@WebServlet(urlPatterns = { "/addkysymys", "/deletedminquestion" ,"/updatekysymys", "/readtoupdatekysymys"})
+@WebServlet(urlPatterns = { "/addkysymys", "/readkysymys", "/deleteadminquestion", "/updatekysymys",
+		"/readtoupdatekysymys" })
 public class HandleKysymys extends HttpServlet {
 //	private static final long serialVersionUID = 1L;
 
@@ -29,11 +30,20 @@ public class HandleKysymys extends HttpServlet {
 //	}
 
 	/**
-	 * 
+	 * @author Mona Jääskeläinen, Annukka Patrikainen, Timo-Jaakko Widgrén Ohjaa
+	 *         metodit kysymysform.jsp:lle, luo Client ja Builder ja return.
 	 */
+
 	private static final long serialVersionUID = 1L;
+
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+	@Override
+	public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
@@ -54,14 +64,11 @@ public class HandleKysymys extends HttpServlet {
 			String kysymysId = request.getParameter("kysymysId");
 			list = deleteadminquestion(request);
 			break;
-		
-		  case "/updatekysymys":
-			  list=updatekysymys(request);
-			  request.setAttribute("kysymykset", list);
-			  RequestDispatcher rd1 = request.getRequestDispatcher("./jsp/kysymysform.jsp");
-			  rd1.forward(request, response);
-			  return;
-			  
+
+		case "/updatekysymys":
+			list = updatekysymys(request);
+			break;
+
 		case "/readtoupdatekysymys":
 			Kysymykset k = readtoupdatekysymys(request);
 			request.setAttribute("kysymykset", k);
@@ -69,7 +76,7 @@ public class HandleKysymys extends HttpServlet {
 			rd.forward(request, response);
 			return;
 		}
-		
+
 		request.setAttribute("kysymyslist", list);
 		RequestDispatcher rd = request.getRequestDispatcher("./jsp/kysymysform.jsp");
 		rd.forward(request, response);
@@ -107,7 +114,7 @@ public class HandleKysymys extends HttpServlet {
 
 	private List<Kysymykset> deleteadminquestion(HttpServletRequest request) {
 		String kysymysId = request.getParameter("kysymysId");
-		String uri = "http://127.0.0.1:8080/rest/questionservice/deleteadminquestion/"+kysymysId;
+		String uri = "http://127.0.0.1:8080/rest/questionservice/deleteadminquestion/" + kysymysId;
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(uri);
 		Builder b = wt.request();
@@ -120,32 +127,29 @@ public class HandleKysymys extends HttpServlet {
 	}
 
 	private List<Kysymykset> updatekysymys(HttpServletRequest request) {
-		// A Fish object to send to our web-service
 		Kysymykset k = new Kysymykset(request.getParameter("kysymysId"), request.getParameter("kysymys"));
 		String uri = "http://127.0.0.1:8080/rest/questionservice/updatekysymys";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(uri);
 		Builder b = wt.request();
-		// alla olevan rivin lisäsin, muuta en muuttanut
-	//	b.header("Authorization", request.getHeader("Authorization"));
-		
+		b.header("Authorization", request.getHeader("Authorization"));
+
 		Entity<Kysymykset> e = Entity.entity(k, MediaType.APPLICATION_JSON);
 		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {
 		};
-		// Posting data (Entity<ArrayList<DogBreed>> e) to the given address
 		List<Kysymykset> returnedList = b.put(e, genericList);
 		return returnedList;
 	}
+
 	private Kysymykset readtoupdatekysymys(HttpServletRequest request) {
-		String kysymysId=request.getParameter("kysymysId");
-		String uri = "http://127.0.0.1:8080/rest/questionservice/readtoupdatekysymys/"+kysymysId;
-		Client c=ClientBuilder.newClient();
-		WebTarget wt=c.target(uri);
-		Builder b=wt.request();
-		Kysymykset kysymykset=b.get(Kysymykset.class);
+		String kysymysId = request.getParameter("kysymysId");
+		String uri = "http://127.0.0.1:8080/rest/questionservice/readtoupdatekysymys/" + kysymysId;
+		Client c = ClientBuilder.newClient();
+		WebTarget wt = c.target(uri);
+		Builder b = wt.request();
+		Kysymykset kysymykset = b.get(Kysymykset.class);
 		return kysymykset;
 
-		 
-		}
-	
+	}
+
 }
