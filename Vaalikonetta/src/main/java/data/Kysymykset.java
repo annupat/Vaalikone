@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 
 /**
  * The persistent class for the kysymykset database table.
- * 
+ * @author Mona J‰‰skel‰inen
  */
 @Entity
 //@Table(name = "kysymykset")

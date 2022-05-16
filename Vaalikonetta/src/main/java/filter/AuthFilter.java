@@ -17,6 +17,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
 
+/**
+ * @author Mona J‰‰skel‰inen
+ * Luodaan filtteri joka vaatii sis‰‰nkirjautumista pyritt‰ess‰ osoitteeseen "/rest/questionservice/readalladminquestions". 
+ * K‰ytt‰j‰tunnus: Admin ja salasana: salasana
+ */
 @WebFilter(dispatcherTypes = {
 								DispatcherType.REQUEST,
 								DispatcherType.FORWARD,

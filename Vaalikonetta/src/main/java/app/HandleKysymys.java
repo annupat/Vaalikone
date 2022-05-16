@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 
 import data.Kysymykset;
 
-@WebServlet(urlPatterns = { "/addkysymys", "/deletedminquestion" ,"/updatekysymys", "/readtoupdatekysymys"})
+@WebServlet(urlPatterns = { "/addkysymys", "/readkysymys", "/deleteadminquestion" , "/updatekysymys", "/readtoupdatekysymys"})
 public class HandleKysymys extends HttpServlet {
 //	private static final long serialVersionUID = 1L;
 
@@ -29,11 +29,19 @@ public class HandleKysymys extends HttpServlet {
 //	}
 
 	/**
-	 * 
+	 * @author Mona Jääskeläinen, Annukka Patrikainen, Timo-Jaakko Widgrén
+	 * Ohjaa metodit kysymysform.jsp:lle, luo Client ja Builder ja return.
 	 */
+
 	private static final long serialVersionUID = 1L;
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+	
+	@Override
+	public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
@@ -57,10 +65,10 @@ public class HandleKysymys extends HttpServlet {
 		
 		  case "/updatekysymys":
 			  list=updatekysymys(request);
-			  request.setAttribute("kysymykset", list);
-			  RequestDispatcher rd1 = request.getRequestDispatcher("./jsp/kysymysform.jsp");
-			  rd1.forward(request, response);
-			  return;
+//			  request.setAttribute("kysymykset", list);
+//			  RequestDispatcher rd1 = request.getRequestDispatcher("./jsp/kysymysform.jsp");
+//			  rd1.forward(request, response);
+			  break;
 			  
 		case "/readtoupdatekysymys":
 			Kysymykset k = readtoupdatekysymys(request);
@@ -127,7 +135,7 @@ public class HandleKysymys extends HttpServlet {
 		WebTarget wt = c.target(uri);
 		Builder b = wt.request();
 		// alla olevan rivin lisäsin, muuta en muuttanut
-	//	b.header("Authorization", request.getHeader("Authorization"));
+		b.header("Authorization", request.getHeader("Authorization"));
 		
 		Entity<Kysymykset> e = Entity.entity(k, MediaType.APPLICATION_JSON);
 		GenericType<List<Kysymykset>> genericList = new GenericType<List<Kysymykset>>() {
