@@ -31,6 +31,8 @@ Uusi vastaus: <input type='text' name='vastaus' value='${requestScope.answer.vas
 <input type='submit' name='ok' value='Send'> 
 </form>
 </body>
+
+<a href='http://127.0.0.1:8080/index.html'>Takaisin etusivulle</a>
 <style>
 .btn .button {
 position: relative;
