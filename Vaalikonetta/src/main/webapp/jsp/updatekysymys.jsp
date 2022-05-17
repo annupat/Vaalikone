@@ -11,8 +11,8 @@
 	<h2>Päivitä kysymystä</h2>
 
 
-	<form action='../updatekysymys' method='post'>
-		<input type='text' name='id'
+	<form action='/updatekysymys' method='post'>
+		<input type='text' name='kysymysId'
 			value='${requestScope.kysymykset.kysymysId}' readonly> <input
 			type='text' name='kysymys' value='${requestScope.kysymykset.kysymys}'
 			size="60" required> <input type='submit' name='ok'

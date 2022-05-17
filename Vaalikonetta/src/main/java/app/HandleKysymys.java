@@ -39,6 +39,7 @@ public class HandleKysymys extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("doPost");
 		doGet(request, response);
 	}
 
@@ -46,6 +47,7 @@ public class HandleKysymys extends HttpServlet {
 	public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
 	}
 
 	@Override

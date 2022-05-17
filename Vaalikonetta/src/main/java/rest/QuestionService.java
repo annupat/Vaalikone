@@ -92,12 +92,13 @@ public class QuestionService {
 	 * @param request
 	 * @param response T‰m‰n pit‰isi p‰ivitt‰‰ kysymys ja ohjata
 	 *                 kysymysform.jsp:lle, mutta ei toimi.
+	 * @return 
 	 */
 	@PUT
 	@Path("/updatekysymys")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateKysymys(Kysymykset kysymys, @Context HttpServletRequest request,
+	public List<Kysymykset> updateKysymys(Kysymykset kysymys, @Context HttpServletRequest request,
 			@Context HttpServletResponse response) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -107,16 +108,17 @@ public class QuestionService {
 		}
 		em.getTransaction().commit();
 		List<Kysymykset> list = adminReadQuestion();
-
-		RequestDispatcher rd1 = request.getRequestDispatcher("/jsp/kysymysform.jsp");
-		request.setAttribute("kysymykset", list);
-		System.out.println("SERVICE: " + list);
-		try {
-			rd1.forward(request, response);
-		} catch (ServletException | IOException e) {
-
-			e.printStackTrace();
-		}
+		
+		return list;
+//		RequestDispatcher rd1 = request.getRequestDispatcher("/jsp/kysymysform.jsp");
+//		request.setAttribute("kysymykset", list);
+//		System.out.println("SERVICE: " + list);
+//		try {
+//			rd1.forward(request, response);
+//		} catch (ServletException | IOException e) {
+//
+//			e.printStackTrace();
+//		}
 
 	}
 
